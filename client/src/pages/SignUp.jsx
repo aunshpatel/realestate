@@ -5,7 +5,7 @@ export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) =>{
     setFormData({
@@ -13,28 +13,40 @@ const navigate = useNavigate();
       [e.target.id]: e.target.value,
     });
   }
-  console.log(formData)
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    setLoading(true);
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-    if(data.success === false){
-      setError(data.message);
+    try{
+      setLoading(true);
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await res.json();
+      if(data.success === false){
+        const message = JSON.stringify(data.message);
+        if (message.includes("username_1") ){
+          setError("Username already exists. Please enter another username.");
+        }
+        else{
+          setError("Email ID already exists. Please enter another email ID or login using the existing id.");
+        }
+        setLoading(false);
+        return;
+      }
       setLoading(false);
-      return;
+      setError(null);
+      alert('Congratulations, you have signed up successfully. You will now be redirected to login page.');
+      navigate('/sign-in');
+
+    } catch(error){
+      setLoading(false);
+      setError(null);
     }
-    setLoading(false);
-    setError(null);
-    navigate('/sign-in');
   }
 
   return (
