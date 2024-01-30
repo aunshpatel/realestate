@@ -12,7 +12,6 @@ export default function SignIn() {
       [e.target.id]: e.target.value,
     });
   }
-  console.log(formData)
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -27,13 +26,14 @@ export default function SignIn() {
 
     const data = await res.json();
     if(data.success === false){
-      // setError(data.message);
-      setError('Wrong email id and/or password. Please check and enter the correct values.');
       setLoading(false);
+      setError(data.message);
+      // setError('Wrong email id and/or password. Please check and enter the correct values.');
       return;
     }
     setLoading(false);
     setError(null);
+    alert('Congratulations, you have signed in successfully. You will now be redirected to home page.');
     navigate('/');
   }
 
