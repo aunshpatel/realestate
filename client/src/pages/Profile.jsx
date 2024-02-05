@@ -49,7 +49,7 @@ export default function Profile() {
     </h1>
     <form className='flex flex-col gap-4'>
       
-      <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic, .heif'/>
+      <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*'/>
 
       <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
       <p className='text-center font-semibold'>
