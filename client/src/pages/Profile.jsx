@@ -15,10 +15,6 @@ export default function Profile() {
   const [updateFail, setUpdateFail] = useState(false);
   const dispatch = useDispatch(); 
 
-  // console.log(fileUploadError);
-  // console.log(filePerc);
-  // console.log(formData)
-
   useEffect(()=>{
     if(file) {
       handleFileUpload(file);
@@ -30,6 +26,7 @@ export default function Profile() {
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
+
     uploadTask.on('state_changed', (snapshot) =>{
       const progress =  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setFilePerc(Math.round(progress));
