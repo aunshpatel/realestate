@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux'
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import heic2any from 'heic2any';
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage';
 import { app } from '../firebase';
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailure, updateUserStart, updateUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from '../redux/user/userSlice';
@@ -21,11 +22,29 @@ export default function Profile() {
     }
   }, [file]);
 
-  const handleFileUpload = (file) =>{
+  const handleFileUpload = async (file) =>{
     const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
+    let fileName, uploadedImage, newFile;
+    
+    if(file.type == 'image/heic'){
+      const convertedBlob = await heic2any({ 
+        blob: file,
+        toType: 'image/jpeg', 
+      });
+
+      uploadedImage = new File([convertedBlob], `${file.name.split(".")[0]}.jpeg`,{
+        type:'image/jpeg'
+      });
+
+      fileName = new Date().getTime() + uploadedImage.name;
+      newFile = uploadedImage;
+    } 
+    else{
+      fileName = new Date().getTime() + file.name;
+      newFile = file;
+    }
     const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const uploadTask = uploadBytesResumable(storageRef, newFile);
 
     uploadTask.on('state_changed', (snapshot) =>{
       const progress =  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -115,7 +134,7 @@ export default function Profile() {
     </h1>
 
     <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-      <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*'/>
+      <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
 
       <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
       <p className='text-center font-semibold'>
