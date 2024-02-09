@@ -4,6 +4,7 @@ import heic2any from 'heic2any';
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage';
 import { app } from '../firebase';
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailure, updateUserStart, updateUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from '../redux/user/userSlice';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
@@ -152,6 +153,9 @@ export default function Profile() {
       <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
         {loading ? 'Loading...' :  'Update'}
       </button>
+      <Link to={"/create-listing"} className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
+        Create Listing
+      </Link>
     </form>
     <p className='text-red-700 mt-5 text-center'>
       {error ? error :''}
