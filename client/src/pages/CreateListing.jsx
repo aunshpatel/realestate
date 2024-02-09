@@ -57,12 +57,10 @@ export default function CreateListing() {
 
                 fileName = new Date().getTime() + uploadedImage.name;
                 newFile = uploadedImage;
-                console.log("if condition newFile type:", newFile.type)
             } 
             else{
                 fileName = new Date().getTime() + file.name;
                 newFile = file;
-                console.log("if condition newFile type:", newFile.type)
             }
             const storageRef = ref(storage, fileName);
             const uploadTask = uploadBytesResumable(storageRef, newFile);
