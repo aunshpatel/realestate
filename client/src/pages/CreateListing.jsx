@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ref, getDownloadURL, getStorage, uploadBytesResumable, deleteObject } from 'firebase/storage';
 import { app } from '../firebase';
+import heic2any from 'heic2any';
 
 
 export default function CreateListing() {
@@ -40,11 +41,31 @@ export default function CreateListing() {
     }
 
     const storeImage = async (file) =>{
-        return new Promise((resolve, reject) =>{
+        return new Promise(async (resolve, reject) => {
             const storage = getStorage(app);
-            const fileName = new Date().getTime() + file.name;
+            let fileName, uploadedImage, newFile;
+    
+            if(file.type == 'image/heic'){
+                const convertedBlob = await heic2any({ 
+                    blob: file,
+                    toType: 'image/jpeg', 
+                });
+
+                uploadedImage = new File([convertedBlob], `${file.name.split(".")[0]}.jpeg`,{
+                    type:'image/jpeg'
+                });
+
+                fileName = new Date().getTime() + uploadedImage.name;
+                newFile = uploadedImage;
+                console.log("if condition newFile type:", newFile.type)
+            } 
+            else{
+                fileName = new Date().getTime() + file.name;
+                newFile = file;
+                console.log("if condition newFile type:", newFile.type)
+            }
             const storageRef = ref(storage, fileName);
-            const uploadTask = uploadBytesResumable(storageRef, file);
+            const uploadTask = uploadBytesResumable(storageRef, newFile);
             uploadTask.on(
                 "state_changed",
                 (snapshot) =>{
