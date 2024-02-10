@@ -129,51 +129,51 @@ export default function Profile() {
   }
 
   return (
-   <div className='p-3 max-w-lg mx-auto'>
-    <h1 className='text-3xl font-semibold text-center my-7'>
-      Profile
-    </h1>
+    <div className='p-3 max-w-lg mx-auto'>
+      <h1 className='text-3xl font-semibold text-center my-7'>
+        Profile
+      </h1>
 
-    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-      <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+        <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
 
-      <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
-      <p className='text-center font-semibold'>
-        {
-          updateSuccess===true ? "":(fileUploadError ? (<span className='text-red-700'>Image Upload Error!</span>) : 
-          filePerc > 0 && filePerc < 100 ? <span className='text-slate-700'>{`${filePerc}% Uploaded`}</span> : filePerc === 100 ? <span className='text-green-700'>Image uploaded successfully!</span> : "")
-        }
+        <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
+        <p className='text-center font-semibold'>
+          {
+            updateSuccess===true ? "":(fileUploadError ? (<span className='text-red-700'>Image Upload Error!</span>) : 
+            filePerc > 0 && filePerc < 100 ? <span className='text-slate-700'>{`${filePerc}% Uploaded`}</span> : filePerc === 100 ? <span className='text-green-700'>Image uploaded successfully!</span> : "")
+          }
+        </p>
+        <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
+        
+        <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
+        
+        <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
+        
+        <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
+          {loading ? 'Loading...' :  'Update'}
+        </button>
+        <Link to={"/create-listing"} className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
+          Create Listing
+        </Link>
+      </form>
+      <p className='text-red-700 mt-5 text-center'>
+        {error ? error :''}
       </p>
-      <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
-      
-      <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
-      
-      <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
-      
-      <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
-        {loading ? 'Loading...' :  'Update'}
-      </button>
-      <Link to={"/create-listing"} className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
-        Create Listing
-      </Link>
-    </form>
-    <p className='text-red-700 mt-5 text-center'>
-      {error ? error :''}
-    </p>
-    <p className='text-red-700 mt-5 text-center'>
-      {updateFail ? 'Profile failed to update!' :''}
-    </p>
-    <p className='text-green-700 mt-5 text-center'>
-      {updateSuccess ? 'Profile updated successfully!' :''}
-    </p>
-    <div className='flex justify-between mt-5'>
-      <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>
-        Delete Account
-      </span>
-      <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
-        Sign Out
-      </span>
-    </div>
+      <p className='text-red-700 mt-5 text-center'>
+        {updateFail ? 'Profile failed to update!' :''}
+      </p>
+      <p className='text-green-700 mt-5 text-center'>
+        {updateSuccess ? 'Profile updated successfully!' :''}
+      </p>
+      <div className='flex justify-between mt-5'>
+        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>
+          Delete Account
+        </span>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
+          Sign Out
+        </span>
+      </div>
    </div>
   )
 }
