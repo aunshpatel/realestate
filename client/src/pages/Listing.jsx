@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
-import { FaBath, FaBed, FaMapMarkerAlt, FaShare, FaParking } from 'react-icons/fa';
+import { FaBath, FaBed, FaMapMarkerAlt, FaShare, FaParking, FaChair } from 'react-icons/fa';
 
 export default function Listing() {
     SwiperCore.use([Navigation])
@@ -105,7 +105,7 @@ export default function Listing() {
                             <FaParking className='text-lg' /> {listing.parking} Car Parking
                         </li>
                         <li className='flex items-center gap-1 whitespace-nowrap'>
-                            <FaParking className='text-lg' /> {listing.furnished}
+                            <FaChair className='text-lg' /> {listing.furnished}
                         </li>
                     </ul>
                 </div>
