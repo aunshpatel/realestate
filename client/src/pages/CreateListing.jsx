@@ -27,7 +27,6 @@ export default function CreateListing() {
         parking:0,
         furnished:'Furnished',
     });
-    // console.log("formData:", formData);
     const [error, setError] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -295,7 +294,7 @@ export default function CreateListing() {
                             </div>
                         ))
                     }
-                    {/* uplaoading stands for image uploading */}
+                    {/* uploading stands for image uploading */}
                     <button disabled={loading || uploading} className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
                         {loading ? 'Creating...':'Create Listing'}
                     </button>
