@@ -134,11 +134,12 @@ export default function CreateListing() {
                 discount: e.target.checked
             })
         }
-        if(e.target.value === 'Furnished' || e.target.value === 'SemiFurnished' || e.target.value === 'Unfurnished'){
+        if(e.target.value === 'Furnished' || e.target.value === 'Semi-Furnished' || e.target.value === 'Unfurnished'){
             setFormData({
                 ...formData,
                 furnished: e.target.value
             })
+            setSelectedValue(e.target.value)
         }
 
         if(e.target.type === 'number' || e.target.type === 'text' || e.target.type === 'textarea'){
@@ -280,7 +281,7 @@ export default function CreateListing() {
                     <div className='flex gap-2'> 
                         <select value={selectedValue} name="furnished" onChange={handleChange} id="furnished" className='w-26 border p-3 rounded-lg'>
                             <option value="Furnished">Furnished</option>
-                            <option value="SemiFurnished">Semi Furnished</option>
+                            <option value="Semi-Furnished">Semi Furnished</option>
                             <option value="Unfurnished">Unfurnished</option>
                         </select>
                     </div>
