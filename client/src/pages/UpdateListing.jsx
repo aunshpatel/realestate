@@ -201,7 +201,7 @@ export default function UpdateListing() {
             if(data.success === false){
                 setError(data.message)
             }
-            alert('Listing Updated Succeessfully. You will now be redirected to its page.');
+            alert('Listing updated successfully! You will now be redirected to its page.');
             navigate(`/listing/${data._id}`);
 
         } catch (error) {
