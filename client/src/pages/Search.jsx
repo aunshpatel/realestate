@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 
 export default function Search() {
-    const [selectedValue, setSelectedValue] = useState('Furnished'); 
+    const [selectedValue, setSelectedValue] = useState('All'); 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
@@ -13,7 +13,7 @@ export default function Search() {
         searchTerm:'',
         type:'all',
         // parking:0,
-        furnished:'DefaultValue',
+        furnished:'All',
         discount:false,
         sort:'createdAt',
         order:'desc',
@@ -35,7 +35,7 @@ export default function Search() {
             setSidebarData({
                 searchTerm: searchTermFormUrl || '',
                 type: typeFormUrl || 'all',
-                furnished: furnishedFormUrl || 'DefaultValue',
+                furnished: furnishedFormUrl || 'All',
                 discount: discountFormUrl === 'true' ? true : false,
                 sort: sortTermFormUrl || 'createdAt',
                 order: orderFormUrl || 'desc',
@@ -116,12 +116,12 @@ export default function Search() {
                         </div>
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
-                        <label className='font-semibold'>Amenities:</label>
+                        <label className='font-semibold'>Furnishing:</label>
                         <div className='flex gap-2'>
                             
                             
-                            <select id="furnishedDropdown" value={selectedValue} onChange={handleChange} className='border rounded-lg p-3'>
-                                <option value="DefaultValue">Select an option</option>
+                            <select id="furnishedDropdown" defaultValue={"All"} value={selectedValue} onChange={handleChange} className='border rounded-lg p-3'>
+                                <option value="All">All</option>
                                 <option value="Furnished">Furnished</option>
                                 <option value="Semi-Furnished">Semi Furnished</option>
                                 <option value="Unfurnished">Unfurnished</option>
@@ -133,7 +133,7 @@ export default function Search() {
                     </div>
                     <div className='flex items-center gap-2'>
                         <label className='font-semibold'>Sort:</label>
-                        <select id="sort_order" defaultValue={'created_at_desc'} onChange={handleChange} className='border rounded-lg p-3'>
+                        <select id="sort_order" defaultValue={'createdAt_desc'} onChange={handleChange} className='border rounded-lg p-3'>
                             <option value="regularPrice_desc">Price: High to Low</option>
                             <option value="regularPrice_asc">Price: Low to High</option>
                             <option value="createdAt_desc">Latest First</option>

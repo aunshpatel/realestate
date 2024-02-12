@@ -63,17 +63,18 @@ export const getListings = async(req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     let discount = req.query.discount;
+
     if(discount === undefined || discount === 'false'){
       discount = { $in:[false, true] };
     }
 
     let furnished = req.query.furnished;
-    if(furnished === undefined || furnished === 'DefaultValue'){
-      furnished = { $in:['SemiFurnished', 'Unfurnished', 'Furnished'] };
+    if(furnished === undefined || furnished === 'All'){
+      furnished = { $in:['Semi-Furnished', 'Unfurnished', 'Furnished'] };
     }
 
-    if(furnished === 'SemiFurnished'){
-      furnished = { $in:['SemiFurnished'] };
+    if(furnished === 'Semi-Furnished'){
+      furnished = { $in:['Semi-Furnished'] };
     }
     if(furnished === 'Furnished'){
       furnished = { $in:['Furnished'] };
@@ -98,7 +99,7 @@ export const getListings = async(req, res, next) => {
       discount,
       furnished,
       type
-    }).sort({[ sort]: order }).limit(limit).skip(startIndex);
+    }).sort({[sort]: order }).limit(limit).skip(startIndex);
 
     return res.status(200).json(listings);
   } catch (error) {
