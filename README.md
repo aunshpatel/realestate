@@ -10,8 +10,7 @@ Coming Soon
 - Express
 - React
 - Node
-- HTML
-- CSS
+- JSON Web Token(JWT)
 - Tailwind CSS
 - Google OAuth
 
