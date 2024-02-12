@@ -68,13 +68,23 @@ export const getListings = async(req, res, next) => {
     }
 
     let furnished = req.query.furnished;
-    if(furnished === undefined || furnished === ''){
+    if(furnished === undefined || furnished === 'DefaultValue'){
       furnished = { $in:['SemiFurnished', 'Unfurnished', 'Furnished'] };
+    }
+
+    if(furnished === 'SemiFurnished'){
+      furnished = { $in:['SemiFurnished'] };
+    }
+    if(furnished === 'Furnished'){
+      furnished = { $in:['Furnished'] };
+    }
+    if(furnished === 'Unfurnished'){
+      furnished = { $in:['Unfurnished'] };
     }
 
     let type = req.query.type;
     if(type === undefined || type === 'all') {
-      type = { $in:['sale', 'rent'] }
+      type = { $in:['sell', 'rent'] }
     }
 
     const searchTerm = req.query.searchTerm || '';
