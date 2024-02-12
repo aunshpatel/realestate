@@ -12,7 +12,7 @@ export default function UpdateListing() {
     const [files, setFiles] = useState([]);
     const [imageUploadError, setImageUploadError] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('Furnished'); 
+    // const [selectedValue, setSelectedValue] = useState('Furnished');
     const [formData, setFormData] = useState({
         imageUrls:[],
         name:'',
@@ -294,7 +294,7 @@ export default function UpdateListing() {
                         </div>
                     </div>
                     <div className='flex gap-2'> 
-                        <select value={selectedValue} name="furnished" onChange={handleChange} id="furnished" className='w-26 border p-3 rounded-lg'>
+                        <select value={formData.furnished} name="furnished" onChange={handleChange} id="furnished" className='w-26 border p-3 rounded-lg'>
                             <option value="Furnished">Furnished</option>
                             <option value="Semi-Furnished">Semi Furnished</option>
                             <option value="Unfurnished">Unfurnished</option>
