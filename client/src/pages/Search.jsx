@@ -88,7 +88,7 @@ export default function Search() {
         urlParams.set('sort', sidebarData.sort)
         urlParams.set('order', sidebarData.order)
         const searchQuery = urlParams.toString()
-        navigate(`/search?${searchQuery}`)
+        navigate(`/all-listings?${searchQuery}`)
     }
 
     return (

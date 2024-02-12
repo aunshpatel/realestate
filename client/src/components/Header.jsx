@@ -13,7 +13,7 @@ export default function Header() {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    navigate(`/all-listings?${searchQuery}`);
   }
 
   useEffect(() =>{
@@ -39,39 +39,39 @@ export default function Header() {
               <FaSearch className='text-slate-600' />
             </button>
         </form>
-        <ul className='flex gap-4'>
-            <Link to='/'>
+        {
+          currentUser ? (
+            <ul className='flex gap-4'>
+              <Link to='/'>
                 <li className='hidden sm:inline text-slate-700 hover:underline'>Home</li>
-            </Link>
-            <Link to='/about'>
-                <li className='hidden sm:inline text-slate-700 hover:underline'>About</li>
-            </Link>
-            {/* <Link to='/profile'>
-            {
-              currentUser ? (
-                  <img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt="Profile" />
-              ):(
-                  <li className='text-slate-700 hover:underline'>Sign In</li>
-              )
-            }
-            </Link>  */}
-
-
-            {
-              currentUser ? (
+                </Link>
+                <Link to='/about'>
+                    <li className='hidden sm:inline text-slate-700 hover:underline'>About</li>
+                </Link>
+                <Link to={"/create-listing"}>
+                  <li className='hidden sm:inline text-slate-700 hover:underline'>Create Listing</li>
+                </Link>
+                <Link to={"/all-listings"}>
+                  <li className='hidden sm:inline text-slate-700 hover:underline'>All Listings</li>
+                </Link>
                 <Link to='/profile'>
                   <img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt="Profile" />
                 </Link>
-              ):(
+            </ul>
+          ):(
+            <ul className='flex gap-4'>
+                <Link to='/'>
+                  <li className='hidden sm:inline text-slate-700 hover:underline'>Home</li>
+                </Link>
+                <Link to='/about'>
+                    <li className='hidden sm:inline text-slate-700 hover:underline'>About</li>
+                </Link>
                 <Link to='/sign-in'>
                   <li className='text-slate-700 hover:underline'>Sign In</li>
                 </Link>
-              )
-            }
-            {/* <Link to='/sign-in'>
-                <li className='text-slate-700 hover:underline'>Sign In</li>
-            </Link> */}
-        </ul>
+            </ul>
+          )
+        }
       </div>
     </header>
   )
