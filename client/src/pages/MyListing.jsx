@@ -98,7 +98,7 @@ export default function MyListing() {
           border-radius: 50%;
           background-color: transparent;
           border: 1px solid grey;
-          color: grey;
+          color: black;
           transition: all 120ms ease;
       
           > svg {
