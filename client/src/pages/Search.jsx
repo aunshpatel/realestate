@@ -167,7 +167,9 @@ export default function Search() {
                 </div>
                 
                 <div className='py-2 md:p-4 flex flex-wrap gap-4 overflow-y-scroll w-[270px] md:w-max'>
-                    { !loading && listings.length === 0 && ( <p className='text-xl text-color-slate-700 text-center w-full'> No listing found! </p> )}
+                    { !loading && listings.length === 0 && ( 
+                        <p className='text-xl text-color-slate-700 w-screen text-center'> No listing found! </p>
+                    )}
                     { loading && ( <p className='text-xl text-color-slate-700 text-center w-full'>Loading...</p> )}
                     {
                         !loading && listings && listings.map((listing) => ( 
