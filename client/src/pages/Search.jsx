@@ -113,7 +113,7 @@ export default function Search() {
         <div className='flex flex-col px-7'>
             <h1 className='text-3xl font-semibold rounded-md w-full text-center p-4 text-slate-700 mt-5'>All Listings</h1>
             <div className='flex flex-col md:flex-row md:max-h-[750px]'>
-                <div className='py-7 px-4 h-fit md:w-[500px] border-2 rounded-lg'>
+                <div className='py-7 px-4 h-fit md:w-[250px] border-2 rounded-lg'>
                     <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                         <div className='flex items-center gap-2'>
                             <input type="text" id='searchTerm' value={sidebarData.searchTerm} onChange={handleChange} placeholder='Search Here' className='border rounded-lg p-3 w-full'/>
@@ -166,7 +166,7 @@ export default function Search() {
                     </form>
                 </div>
                 
-                <div className='p-4 flex flex-wrap gap-4 max-w-max overflow-y-scroll justify-center'>
+                <div className='py-2 md:p-4 flex flex-wrap gap-4 overflow-y-scroll w-[270px] md:w-max'>
                     { !loading && listings.length === 0 && ( <p className='text-xl text-color-slate-700 text-center w-full'> No listing found! </p> )}
                     { loading && ( <p className='text-xl text-color-slate-700 text-center w-full'>Loading...</p> )}
                     {
