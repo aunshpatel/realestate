@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 
 export default function MyListing() {
     const [listing, setListing] = useState(null);
-    // const [loading, setLoading] = useState(false);
     const [showListingsError, setShowListingsError] = useState(false);
     const {currentUser} = useSelector((state) => state.user);
     const [userListings, setUserListings] = useState([]);
 
-    console.log("currentUser: ", currentUser)
     useEffect(() =>{
         const handleShowListings = async () => {
             try{ 
@@ -30,8 +28,6 @@ export default function MyListing() {
 
         // 
     }, [currentUser._id]);
-
-
 
     const handleListingDelete = async(listingID) => {
         try {
@@ -55,7 +51,7 @@ export default function MyListing() {
 
     return (
         userListings.length > 0 ? (
-            <div className='p-3 max-w-lg mx-auto'>
+            <div className='p-3 max-w-fit mx-auto'>
                 <h1 className='text-3xl font-semibold text-center my-7'>
                     All Listings
                 </h1>
