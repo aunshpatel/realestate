@@ -20,13 +20,11 @@ export const signin = async (req, res, next)=>{
    try{
       const validUser = await User.findOne({email});
       if(!validUser || validUser == null) {
-         console.log("User not found! Please enter the correct details.");
          return next(errorHandler(404, 'User not found! Please enter the correct details or sign up.'));
       }
 
       const validPassword = bcryptjs.compareSync(password, validUser.password);
       if(!validPassword || validPassword == null) {
-         console.log("Invalid Password! Please enter the correct password.");
          return next(errorHandler(404, "Invalid Password! Please enter the correct password."));
       }
 
@@ -35,7 +33,6 @@ export const signin = async (req, res, next)=>{
       res.cookie('access_token', token, {httpOnly:true}).status(200).json(rest);
       
    } catch(error){
-      console.log("Error:" + error)
       next(error);
    }
 }
