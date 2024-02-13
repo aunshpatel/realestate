@@ -212,10 +212,11 @@ export default function Profile() {
           Sign Out
         </span>
       </div>
-      <button onClick={handleShowListings} className='text-green-700 w-full'>Show My Listings Here</button>
-      <Link to={"/my-listing"}>
+      {/* <button onClick={handleShowListings} className='text-green-700 w-full'>Show My Listings Here</button> */}
+
+      {/* <Link to={"/my-listing"}>
         <button className='text-green-700 w-full'>Show My Listings</button>
-      </Link>
+      </Link> */}
 
 
       <p className='text-red-700 mt-5'>
