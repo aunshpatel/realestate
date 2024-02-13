@@ -33,12 +33,6 @@ export default function Header() {
                 <span className='text-slate-700'>Estate</span>
             </h1>
         </Link>
-        {/* <form onSubmit={handleSubmit} className='bg-slate-100 p-3 rounded-lg flex items-center'>
-            <input type="text" placeholder='Search' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className='bg-transparent focus:outline-none w-24 sm:w-64'/>
-            <button>
-              <FaSearch className='text-slate-600' />
-            </button>
-        </form> */}
         {
           currentUser ? (
             <ul className='flex gap-4'>
