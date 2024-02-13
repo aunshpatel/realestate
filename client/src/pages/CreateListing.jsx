@@ -188,7 +188,7 @@ export default function CreateListing() {
             if(data.success === false){
                 setError(data.message)
             }
-            alert('Listing Created Succeessfully. You will now be redirected to its page.');
+            alert('Listing Created Successfully. You will now be redirected to its page.');
             navigate(`/listing/${data._id}`);
 
         } catch (error) {
