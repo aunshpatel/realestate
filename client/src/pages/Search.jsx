@@ -138,7 +138,7 @@ export default function Search() {
                         <div className='flex gap-2'>
                             
                             
-                            <select id="furnishedDropdown" defaultValue={"All"} value={selectedValue} onChange={handleChange} className='border rounded-lg p-3'>
+                            <select id="furnishedDropdown" value={selectedValue} onChange={handleChange} className='border rounded-lg p-3'>
                                 <option value="All">All</option>
                                 <option value="Furnished">Furnished</option>
                                 <option value="Semi-Furnished">Semi Furnished</option>
