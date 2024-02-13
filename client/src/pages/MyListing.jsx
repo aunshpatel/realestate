@@ -51,6 +51,7 @@ export default function MyListing() {
       
         & .${classes.selectLabel} {
           margin: 0;
+          text-transform: capitalize;
         }
       
         & .${classes.select}{
@@ -59,17 +60,18 @@ export default function MyListing() {
           border: 1px solid grey;
           border-radius: 6px; 
           background-color: transparent;
-          color: grey;
+          color: black;
           transition: all 100ms ease;
       
           &:hover {
-            background-color: grey;
+            // background-color: grey;
+            cursor:pointer;
             border-color: grey;
           }
       
           &:focus {
-            outline: 3px solid grey;
-            border-color: blue;
+            outline: 1px solid grey;
+            border-color: grey;
           }
         }
       
@@ -105,6 +107,7 @@ export default function MyListing() {
       
           &:hover {
             background-color: grey;
+            cursor:pointer;
             border-color: grey;
           }
       
