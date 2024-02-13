@@ -59,49 +59,53 @@ export default function MyListing() {
                     {showListingsError ? 'Error showing listings!' : ''}
                 </p>
                 <table className='my-7'>
-                    <tr className='border p-3 flex items-center gap-4'>
-                        <th className='w-10'>
-                            Sr No.
-                        </th>
-                        <th className='w-20'>
-                            Image
-                        </th>
-                        <th>
-                            Title
-                        </th>
-                        <th>
+                    <thead>
+                        <tr className='border p-3 flex items-center gap-4'>
+                            <th className='w-10'>
+                                Sr No.
+                            </th>
+                            <th className='w-20'>
+                                Image
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
 
-                        </th>
-                    </tr>
+                            </th>
+                        </tr>
+                    </thead>
                     {
                         userListings.map((listing, index) =>(
-                        <tr key={listing._id} className='border p-3 flex items-center gap-4 hover:bg-gray-50'>
-                            <td className='w-10 items-center flex flex-col'>
-                                {(index+1).toString()}
-                            </td>
-                            <td className='w-20'>
-                                <Link to={`/listing/${listing._id}`}>
-                                    <img src={listing.imageUrls[0]} alt='Listing Cover Image' className='h-20 w-20 object-contain rounded-lg'/>
-                                </Link>
-                            </td>
-                            <td className='w-100'>
-                                <Link className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing/${listing._id}`}>
-                                    <p className='w-[240px] sm:w-[400px] truncate'>
-                                        {listing.name}
-                                    </p>
-                                </Link>
-                            </td>
-                            <td className='flex flex-col item-center'>
-                                <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>
-                                    Delete
-                                </button>
-                                <Link to={`/update-listing/${listing._id}`}>
-                                    <button className='text-green-700 uppercase'>
-                                        Edit
+                        <tbody>
+                            <tr key={listing._id} className='border p-3 flex items-center gap-4 hover:bg-gray-50'>
+                                <td className='w-10 items-center flex flex-col'>
+                                    {(index+1).toString()}
+                                </td>
+                                <td className='w-20'>
+                                    <Link to={`/listing/${listing._id}`}>
+                                        <img src={listing.imageUrls[0]} alt='Listing Cover Image' className='h-20 w-20 object-contain rounded-lg'/>
+                                    </Link>
+                                </td>
+                                <td className='w-100'>
+                                    <Link className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing/${listing._id}`}>
+                                        <p className='w-[240px] sm:w-[400px] truncate'>
+                                            {listing.name}
+                                        </p>
+                                    </Link>
+                                </td>
+                                <td className='flex flex-col item-center'>
+                                    <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>
+                                        Delete
                                     </button>
-                                </Link>
-                            </td>
-                        </tr> 
+                                    <Link to={`/update-listing/${listing._id}`}>
+                                        <button className='text-green-700 uppercase'>
+                                            Edit
+                                        </button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        </tbody>
                         ))
                     }
                 </table>
