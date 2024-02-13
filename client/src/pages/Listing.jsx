@@ -117,10 +117,17 @@ export default function Listing() {
                             <span>$ {listing.regularPrice.toLocaleString('en-US')}</span>
                         } { listing.type === 'rent' && '/ month'}
                     </p>
+                    
                     <p className='flex items-center gap-2 text-slate-600 my-1 text-md'>
                         <FaMapMarkerAlt className='text-green-700'/>
-                        {listing.address}
+                        <a href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
+                            {listing.address}
+                        </a>
                     </p>
+
+                    <div>
+                        
+                    </div>
                     <div className='flex gap-4'>
                         {listing.type === 'rent' ? 
                             <p className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
