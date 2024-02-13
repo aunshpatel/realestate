@@ -7,9 +7,12 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import { FaBath, FaBed, FaMapMarkerAlt, FaShare, FaParking, FaChair } from 'react-icons/fa';
 import Contact from '../components/Contact';
+import { Link, useNavigate } from 'react-router-dom';
+import { ref, getStorage, deleteObject } from 'firebase/storage';
 
 export default function Listing() {
     SwiperCore.use([Navigation]);
+    const navigate = useNavigate();
     const {currentUser} = useSelector((state) => state.user);
     const [contact, setContact] = useState(false);
     const [listing, setListing] = useState(null);
@@ -39,6 +42,41 @@ export default function Listing() {
 
         fetchListing();
     }, [params.listingId]);
+
+    const handleListingDelete = async(listingID) => {
+        try {
+            const userData = await fetch(`/api/user/listings/${currentUser._id}`);
+            const userDataJson = await userData.json();
+            const storage = getStorage();
+
+            for(let i=0;i<userDataJson[0].imageUrls.length;i++){
+                const name = userDataJson[0].imageUrls.at(i);
+                const desertRef = ref(storage, name);
+                deleteObject(desertRef).then(() => {
+                    console.log("Image Removed Successfully")
+                }).catch((error) => {
+                    console.log(error)
+                });
+            }
+
+            const res = await fetch(`/api/listing/delete/${listingID}`, {
+                method:'DELETE'
+            });
+
+            const data = await res.json();
+            if(data.success === false) {
+                console.log(data.message);
+                return;
+            }
+            navigate('/my-listing');
+            // setUserListings( 
+            //     (prev) => prev.filter((listing) => listing._id !== listingID)
+            // );
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     return (<main>
         { loading && <p className='text-center my-7 text-2xl'>Loading....</p> }
@@ -84,12 +122,17 @@ export default function Listing() {
                         {listing.address}
                     </p>
                     <div className='flex gap-4'>
-                        <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
-                            {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
-                        </p>
+                        {listing.type === 'rent' ? 
+                            <p className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
+                                For Rent
+                            </p> : 
+                            <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
+                                For Sale
+                            </p>
+                        }
                         {
                             listing.discount && (
-                                <p className='bg-green-900 w-ful max-w-[200px] text-white text-center p-2 rounded-md'>
+                                <p className='bg-blue-600 w-ful max-w-[200px] text-white text-center p-2 rounded-md'>
                                     ${(listing.regularPrice - listing.discountPrice).toLocaleString('en-US')} Discount
                                 </p>
                             )
@@ -113,6 +156,21 @@ export default function Listing() {
                             <FaChair className='text-lg' /> {listing.furnished}
                         </li>
                     </ul>
+                    {
+                        currentUser && listing.userRef === currentUser._id && (
+                            <div className='flex flex-wrap items-center gap-4 sm:gap-6'>
+                                <button onClick={() => handleListingDelete(listing._id)} className='bg-red-900 w-full max-w-[200px] text-white text-center p-2 rounded-md uppercase'>
+                                    Delete Listing
+                                </button>
+                                
+                                <Link to={`/update-listing/${listing._id}`}>
+                                    <button className='bg-green-900 w-[200px] text-white text-center p-2 rounded-md uppercase'>
+                                        Edit Listing
+                                    </button>
+                                </Link>
+                            </div>
+                        )
+                    }
                     {
                         currentUser && listing.userRef !== currentUser._id && !contact &&(
                             <button onClick={ () => { setContact(true) } } className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'>

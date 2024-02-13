@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { styled } from '@mui/system';
 import { TablePagination, tablePaginationClasses as classes } from '@mui/base/TablePagination';
@@ -6,12 +5,12 @@ import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
 import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-
-import {useSelector, useDispatch} from 'react-redux';
+import { ref, getStorage, deleteObject } from 'firebase/storage';
+import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function MyListing() {
-    const [listing, setListing] = React.useState(null);
+    // const [listing, setListing] = React.useState(null);
     const [showListingsError, setShowListingsError] = React.useState(false);
     const {currentUser} = useSelector((state) => state.user);
     const [userListings, setUserListings] = React.useState([]);
@@ -123,10 +122,10 @@ export default function MyListing() {
           }
         }
         `,
-      );
+    );
       
 
-    React.useEffect(() =>{
+    React.useEffect(() => {
         const handleShowListings = async () => {
             try{ 
               setShowListingsError(false);
@@ -149,6 +148,20 @@ export default function MyListing() {
 
     const handleListingDelete = async(listingID) => {
         try {
+            const userData = await fetch(`/api/user/listings/${currentUser._id}`);
+            const userDataJson = await userData.json();
+            const storage = getStorage();
+
+            for(let i=0;i<userDataJson[0].imageUrls.length;i++){
+                const name = userDataJson[0].imageUrls.at(i);
+                const desertRef = ref(storage, name);
+                deleteObject(desertRef).then(() => {
+                    console.log("Image Removed Successfully")
+                }).catch((error) => {
+                    console.log(error)
+                });
+            }
+
             const res = await fetch(`/api/listing/delete/${listingID}`, {
                 method:'DELETE'
             });
@@ -171,7 +184,7 @@ export default function MyListing() {
         userListings.length > 0 ? (
             <div className='p-3 max-w-fit mx-auto'>
                 <h1 className='text-3xl font-semibold text-center my-7'>
-                    All Listings
+                    My Listings
                 </h1>
                 <p className='text-red-700 mt-5'>
                     {showListingsError ? 'Error showing listings!' : ''}
