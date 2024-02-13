@@ -212,15 +212,20 @@ export default function Profile() {
           Sign Out
         </span>
       </div>
-      <button onClick={handleShowListings} className='text-green-700 w-full'>Show Listings</button>
+      <button onClick={handleShowListings} className='text-green-700 w-full'>Show My Listings Here</button>
+      <Link to={"/my-listing"}>
+        <button className='text-green-700 w-full'>Show My Listings</button>
+      </Link>
+
+
       <p className='text-red-700 mt-5'>
         {showListingsError ? 'Error showing listings!' : ''}
       </p>
-      {
+      {/* {
         userListings && userListings.length > 0 && 
         <div className='flex flex-col gap-4'>
           <h1 className='text-center mt-7 text-2xl font-semibold'>
-            Your Listings
+            All Listings
           </h1>
           {
             userListings.map((listing) =>(
@@ -246,8 +251,8 @@ export default function Profile() {
               </div> 
             ))
           }
-      </div>
-      }
+        </div>
+      } */}
    </div>
   )
 }
