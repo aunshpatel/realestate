@@ -63,7 +63,7 @@ export default function SignUp() {
 
         <button disabled={loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:placeholder-opacity-80' onChange={handleChange}>
           {loading?'Loading':'Sign Up'}
-          {/* Sign Up */}
+          
         </button>
         <OAuth />
         

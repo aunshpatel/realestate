@@ -6,16 +6,12 @@ import errorHandler from "../utils/error.js";
 export const signup = async (req, res, next)=>{
    const {username, email, password} = req.body;
    const hashedPassword = bcryptjs.hashSync(password, 10);
-   // const newUser = new User({username, email, hashedPassword});
-//   const newUser = new User({username:username, email:email, password:hashedPassword});
-  const newUser = new User({username, email, password:hashedPassword});
+   const newUser = new User({username, email, password:hashedPassword});
    try{
       await newUser.save();
       res.status(201).json({message:'User created successfully'});
    } catch(error){
-      // res.status(500).json(error.message);
       next(error);
-      // next(errorHandler(501, 'Error from the function'));
    }
 }
 
@@ -29,10 +25,6 @@ export const signin = async (req, res, next)=>{
       }
 
       const validPassword = bcryptjs.compareSync(password, validUser.password);
-      // if((!validUser && !validPassword) || (validUser == null && validPassword == null)) {
-      //    console.log("Invalid Password and Email ID! Please enter the correct details.");
-      //    return next(errorHandler(404, 'Invalid Password and Email ID! Please enter the correct details.'));
-      // }
       if(!validPassword || validPassword == null) {
          console.log("Invalid Password! Please enter the correct password.");
          return next(errorHandler(404, "Invalid Password! Please enter the correct password."));
