@@ -7,7 +7,7 @@ export default function Search() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
-    console.log(listings);
+    const [showMore, setShowMore] = useState(false);
 
     const [sidebarData, setSidebarData] = useState({
         searchTerm:'',
@@ -18,8 +18,6 @@ export default function Search() {
         sort:'createdAt',
         order:'desc',
     });
-
-    console.log("Sidebar Data:", sidebarData)
     
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
@@ -44,9 +42,15 @@ export default function Search() {
 
         const fetchListings = async () =>{
             setLoading(true);
+            setShowMore(false);
             const searchQuery = urlParams.toString();
             const res = await fetch(`/api/listing/get?${searchQuery}`);
             const data = await res.json();
+            if(data.length > 8) {
+                setShowMore(true);
+            } else{
+                setShowMore(false);
+            }
             setListings(data);
             setLoading(false);
         }
@@ -89,6 +93,20 @@ export default function Search() {
         urlParams.set('order', sidebarData.order)
         const searchQuery = urlParams.toString()
         navigate(`/all-listings?${searchQuery}`)
+    }
+
+    const onShowMoreClick = async() => {
+        const numberOfListings = listings.length;
+        const startIndex = numberOfListings;
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        const data = await res.json();
+        if(data.length < 9) {
+            setShowMore(false);
+        }
+        setListings([...listings, ...data]);
     }
 
     return (
@@ -146,12 +164,19 @@ export default function Search() {
                 </form>
             </div>
             <div className='flex-1'>
-                <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>Listing Results:</h1>
+                <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>All Listings</h1>
                 <div className='p-7 flex flex-wrap gap-4'>
                     { !loading && listings.length === 0 && ( <p className='text-xl text-color-slate-700 text-center w-full'> No listing found! </p> )}
                     { loading && ( <p className='text-xl text-color-slate-700 text-center w-full'>Loading...</p> )}
                     {
                         !loading && listings && listings.map((listing) => ( <ListingItem key={listing._id} listing={listing} /> ))
+                    }
+                    {
+                        showMore && (
+                            <button onClick={() => { onShowMoreClick() }} className='text-green-700 hover:underline p-7 text-center w-full'>
+                                Show More
+                            </button>
+                        )
                     }
                 </div>
             </div>
