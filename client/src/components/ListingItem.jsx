@@ -44,9 +44,14 @@ export default function ListingItem({listing}) {
                         </div>
                     </div>
                     <div>
-                        <p className='bg-red-900 max-w-[150px] text-white text-center text-md p-2 rounded-md'>
-                            {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
-                        </p>
+                    {listing.type === 'rent' ?  
+                        (<p className='bg-slate-500 max-w-[150px] text-white text-center text-md p-2 rounded-md'>
+                             For Rent
+                        </p>) : 
+                        (<p className='bg-green-900 max-w-[150px] text-white text-center text-md p-2 rounded-md'>
+                            For Sale
+                        </p>)
+                    }
                     </div>
                 </div>
             </Link>
