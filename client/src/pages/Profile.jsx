@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux'
 import React, { useRef, useState, useEffect } from 'react';
 import heic2any from 'heic2any';
-import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage';
+import {getDownloadURL, getStorage, ref, uploadBytesResumable, deleteObject} from 'firebase/storage';
 import { app } from '../firebase';
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailure, updateUserStart, updateUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from '../redux/user/userSlice';
 import { Link } from 'react-router-dom';
@@ -128,9 +128,56 @@ export default function Profile() {
     }
   }
 
+  const handleListingDelete = async(listingID) => {
+    try {
+        const userData = await fetch(`/api/user/listings/${currentUser._id}`);
+        const userDataJson = await userData.json();
+        const storage = getStorage();
+
+        const listingData = await fetch(`/api/listing/get/${listingID}`);
+        const listingDataJson = await listingData.json();
+        
+        for(let i=0;i<listingDataJson.imageUrls.length;i++){
+            // console.log('listingDataJson images:', listingDataJson.imageUrls.at(i));
+            const imageName = listingDataJson.imageUrls.at(i);
+            console.log('listingDataJson images:', imageName);
+            const desertRef = ref(storage, imageName);
+            deleteObject(desertRef).then(() => {
+                console.log("Image Removed Successfully")
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+
+        const res = await fetch(`/api/listing/delete/${listingID}`, {
+            method:'DELETE'
+        });
+
+        const data = await res.json();
+        console.log('data:',data)
+        if(data.success === false) {
+            console.log(data.message);
+            return;
+        }
+        setUserListings( 
+            (prev) => prev.filter((listing) => listing._id !== listingID)
+        );
+
+    } catch (error) {
+        console.log(error.message);
+    }
+  }
+
   const handleDeleteUser = async () => {
     try{
       dispatch(deleteUserStart());
+      const listData = await fetch(`/api/user/listings/${currentUser._id}`);
+      const listDataJson = await listData.json();
+      console.log("listDataJson:",listDataJson)
+      for(let i=0; i< listDataJson.length; i++) {
+        console.log('listDataJson[i]._id:',listDataJson[i]._id);
+        await handleListingDelete(listDataJson[i]._id)
+      }
       const res = await fetch(`/api/user/delete/${currentUser._id}`,{
         method:'DELETE',
       });
@@ -161,42 +208,6 @@ export default function Profile() {
 
     } catch(error){
       dispatch(signoutUserFailure(error.message));
-    }
-  }
-
-  const handleShowListings = async () => {
-    try{ 
-      setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
-      const data = await res.json();
-      if(data.success === false){
-        setShowListingsError(true);
-        return;
-      }
-
-      setUserListings(data);
-    } catch(error){
-      setShowListingsError(true);
-    }
-  }
-
-  const handleListingDelete = async(listingID) => {
-    try {
-      const res = await fetch(`/api/listing/delete/${listingID}`, {
-        method:'DELETE'
-      });
-
-      const data = await res.json();
-      if(data.success === false) {
-        console.log(data.message);
-        return;
-      }
-      setUserListings( 
-        (prev) => prev.filter((listing) => listing._id !== listingID)
-      );
-
-    } catch (error) {
-      console.log(error.message);
     }
   }
 
