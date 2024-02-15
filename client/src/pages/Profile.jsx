@@ -211,7 +211,7 @@ export default function Profile() {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
 
-        <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
+        <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-md h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
         <p className='text-center font-semibold'>
           {
             updateSuccess===true ? "":(fileUploadError ? (<span className='text-red-700'>Image Upload Error!</span>) : 

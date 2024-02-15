@@ -107,7 +107,7 @@ export default function Header() {
                       <li className='text-xl'>All Listings</li>
                     </Link>
                     <Link to='/profile'>
-                      <img className='rounded-full h-20 w-20 object-cover' src={currentUser.avatar} alt="Profile" onClick={() => setIsNavOpen(false)} />
+                      <img className='rounded-lg h-20 w-20 object-cover' src={currentUser.avatar} alt="Profile" onClick={() => setIsNavOpen(false)} />
                     </Link>
                 </ul>
               ):(
@@ -149,7 +149,7 @@ export default function Header() {
                   <li className=''>All Listings</li>
                 </Link>
                 <Link to='/profile' className="">
-                  <img className='rounded-full h-8 w-8 object-cover' src={currentUser.avatar} alt="Profile" />
+                  <img className='rounded-lg h-8 w-8 object-cover' src={currentUser.avatar} alt="Profile" />
                 </Link>
             </ul>
           ):(
