@@ -32,7 +32,6 @@ export default function SignIn() {
       const data = await res.json();
       if(data.success === false){
         dispatch(signInFailure(data.message));
-        // setError('Wrong email id and/or password. Please check and enter the correct values.');
         return;
       }
       
@@ -56,6 +55,7 @@ export default function SignIn() {
         <button disabled={loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:placeholder-opacity-80' onChange={handleChange}>
           {loading?'Loading':'Sign In'}
         </button>
+        
         <OAuth />
         
         {error && <p className='text-red-500 mt-5'>{error}</p>}

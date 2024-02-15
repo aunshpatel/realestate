@@ -4,7 +4,6 @@ import heic2any from 'heic2any';
 import {getDownloadURL, getStorage, ref, uploadBytesResumable, deleteObject} from 'firebase/storage';
 import { app } from '../firebase';
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailure, updateUserStart, updateUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from '../redux/user/userSlice';
-import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
@@ -14,9 +13,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [userListings, setUserListings] = useState([]);
   const [updateFail, setUpdateFail] = useState(false);
-  const [showListingsError, setShowListingsError] = useState(false);
   const dispatch = useDispatch(); 
 
   useEffect(()=>{
@@ -48,7 +45,6 @@ export default function Profile() {
       let tempName1, finalFileName;
       if(file.name.includes(" ")) {
         tempName1 = file.name.split(" ").join("");
-        console.log("inside condition 1 tempName1:", tempName1);
         if(tempName1.includes("(") && tempName1.includes(")")){
           let tempName2, tempName3;
           if(tempName1.includes("(")){
@@ -138,9 +134,7 @@ export default function Profile() {
         const listingDataJson = await listingData.json();
         
         for(let i=0;i<listingDataJson.imageUrls.length;i++){
-            // console.log('listingDataJson images:', listingDataJson.imageUrls.at(i));
             const imageName = listingDataJson.imageUrls.at(i);
-            console.log('listingDataJson images:', imageName);
             const desertRef = ref(storage, imageName);
             deleteObject(desertRef).then(() => {
                 console.log("Image Removed Successfully")
@@ -154,7 +148,6 @@ export default function Profile() {
         });
 
         const data = await res.json();
-        console.log('data:',data)
         if(data.success === false) {
             console.log(data.message);
             return;
@@ -173,9 +166,7 @@ export default function Profile() {
       dispatch(deleteUserStart());
       const listData = await fetch(`/api/user/listings/${currentUser._id}`);
       const listDataJson = await listData.json();
-      console.log("listDataJson:",listDataJson)
       for(let i=0; i< listDataJson.length; i++) {
-        console.log('listDataJson[i]._id:',listDataJson[i]._id);
         await handleListingDelete(listDataJson[i]._id)
       }
       const res = await fetch(`/api/user/delete/${currentUser._id}`,{
@@ -254,10 +245,6 @@ export default function Profile() {
           Sign Out
         </span>
       </div>
-
-      <p className='text-red-700 mt-5'>
-        {showListingsError ? 'Error showing listings!' : ''}
-      </p>
    </div>
   )
 }

@@ -12,7 +12,6 @@ export default function Search() {
     const [sidebarData, setSidebarData] = useState({
         searchTerm:'',
         type:'all',
-        // parking:0,
         furnished:'All',
         discount:false,
         sort:'createdAt',
@@ -151,6 +150,7 @@ export default function Search() {
                                 </select>
                             </div>
                         </div>
+                        
                         <div className='flex flex-wrap items-center gap-2'>
                             <label className='font-semibold'>Sort:</label>
                             <select id="sort_order" defaultValue={'createdAt_desc'} onChange={handleChange} className='border rounded-lg p-3'>
@@ -160,6 +160,7 @@ export default function Search() {
                                 <option value="createdAt_asc">Oldest First</option>
                             </select>
                         </div>
+                        
                         <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
                             Search
                         </button>

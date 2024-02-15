@@ -157,12 +157,8 @@ export default function MyListing() {
 
             const listingData = await fetch(`/api/listing/get/${listingID}`);
             const listingDataJson = await listingData.json();
-            console.log("listingDataJson:",listingDataJson)
-            for(let i=0;i<listingDataJson.imageUrls.length;i++){
-                console.log('listingDataJson images:', listingDataJson.imageUrls.at(i));
-                // const name = userDataJson[0].imageUrls.at(i);
+            for(let i=0;i<listingDataJson.imageUrls.length;i++) {
                 const imageName = listingDataJson.imageUrls.at(i);
-                console.log('listingDataJson images:', imageName);
                 const desertRef = ref(storage, imageName);
                 deleteObject(desertRef).then(() => {
                     console.log("Image Removed Successfully")
@@ -201,9 +197,6 @@ export default function MyListing() {
                 <table className='my-7'>
                     <thead>
                         <tr className='border p-3 flex items-center gap-4'>
-                            {/* <th className='w-10'>
-                                Sr No.
-                            </th> */}
                             <th className='w-20'>
                                 Image
                             </th>
@@ -216,37 +209,34 @@ export default function MyListing() {
                         </tr>
                     </thead>
                     {
-                    (rowsPerPage > 0 ? userListings.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : userListings).map((listing, index) =>(
-                    <tbody>
-                        <tr key={listing._id} className='border p-3 flex items-center gap-4 hover:bg-gray-50'>
-                            {/* <td className='w-10 items-center flex flex-col'>
-                                {(index+1).toString()}
-                            </td> */}
-                            <td className='w-20'>
-                                <Link to={`/listing/${listing._id}`}>
-                                    <img src={listing.imageUrls[0]} alt='Listing Cover Image' className='h-20 w-20 object-contain rounded-lg'/>
-                                </Link>
-                            </td>
-                            <td className='w-100'>
-                                <Link className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing/${listing._id}`}>
-                                    <p className='w-[240px] sm:w-[400px] truncate'>
-                                        {listing.name}
-                                    </p>
-                                </Link>
-                            </td>
-                            <td className='flex flex-col item-center'>
-                                <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>
-                                    Delete
-                                </button>
-                                <Link to={`/update-listing/${listing._id}`}>
-                                    <button className='text-green-700 uppercase'>
-                                        Edit
-                                    </button>
-                                </Link>
-                            </td>
-                        </tr>
-                    </tbody>
-                    ))
+                        (rowsPerPage > 0 ? userListings.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : userListings).map((listing, index) =>(
+                            <tbody>
+                                <tr key={listing._id} className='border p-3 flex items-center gap-4 hover:bg-gray-50'>
+                                    <td className='w-20'>
+                                        <Link to={`/listing/${listing._id}`}>
+                                            <img src={listing.imageUrls[0]} alt='Listing Cover Image' className='h-20 w-20 object-contain rounded-lg'/>
+                                        </Link>
+                                    </td>
+                                    <td className='w-100'>
+                                        <Link className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing/${listing._id}`}>
+                                            <p className='w-[240px] sm:w-[400px] truncate'>
+                                                {listing.name}
+                                            </p>
+                                        </Link>
+                                    </td>
+                                    <td className='flex flex-col item-center'>
+                                        <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>
+                                            Delete
+                                        </button>
+                                        <Link to={`/update-listing/${listing._id}`}>
+                                            <button className='text-green-700 uppercase'>
+                                                Edit
+                                            </button>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        ))
                     }
                     <tfoot>
                         <tr>

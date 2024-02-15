@@ -12,7 +12,6 @@ export default function UpdateListing() {
     const [files, setFiles] = useState([]);
     const [imageUploadError, setImageUploadError] = useState(false);
     const [uploading, setUploading] = useState(false);
-    // const [selectedValue, setSelectedValue] = useState('Furnished');
     const [formData, setFormData] = useState({
         imageUrls:[],
         name:'',
@@ -62,10 +61,12 @@ export default function UpdateListing() {
                 setImageUploadError('Image Upload Failed!');
                 setUploading(false);
             });
-        } else if(files.length === 0){
+        } 
+        else if(files.length === 0){
             setImageUploadError('You have not selected any image! Please select at least 1 image!');
             setUploading(false);
-        }else {
+        }
+        else {
             setImageUploadError('You can upload only upload a maximum of 6 images per listing!');
             setUploading(false);
         }
@@ -91,8 +92,6 @@ export default function UpdateListing() {
                 newFile = uploadedImage;
             } 
             else{
-                // fileName = new Date().getTime() + file.name;
-                // newFile = file;
                 let tempName1, finalFileName;
                 if(file.name.includes(" ")) {
                     tempName1 = file.name.split(" ").join("");
@@ -202,13 +201,6 @@ export default function UpdateListing() {
                 })
             }
         }
-
-        // if(e.target.id === 'parking' || e.target.id === 'bedrooms' || e.target.id === 'bathrooms'){
-        //     setFormData({
-        //         ...formData,
-        //         [e.target.id]: e.target.value
-        //     })
-        // }
     }
 
     const handleSubmit = async (e) =>{
@@ -251,7 +243,6 @@ export default function UpdateListing() {
             <form onSubmit={handleSubmit} className='flex flex-col'>
                 <div className='flex flex-col sm:flex-row gap-6'>
                     <div className='flex flex-col gap-4 flex-1'>
-                        {/* <div className='flex flex-col gap-4 flex-1'> */}
                         <div className='flex flex-col gap-4'>
                             <input type='text' id='name' placeholder='Name' onChange={handleChange} value={formData.name} className='border p-3 rounded-lg' maxLength={62} minLength={3} required />
                             
@@ -286,8 +277,6 @@ export default function UpdateListing() {
                                             <span className='text-xs'>(Monthly)</span>
                                         )
                                     }
-                                    {/* <span className='text-xs'>($/month)</span> */}
-
                                 </div>
                             </div>
                             {
@@ -298,7 +287,6 @@ export default function UpdateListing() {
                                         <div>
                                             <div className='flex flex-col items-center'>
                                                 <p>Discounted Price</p>
-                                                {/* <span className='text-xs'>($/month)</span> */}
                                                 {
                                                     formData.type === 'rent' && 
                                                     (
@@ -328,6 +316,7 @@ export default function UpdateListing() {
                                 <span className='flex items-center'>Parking Spot(s)</span>
                             </div>
                         </div>
+                        
                         <div className='flex gap-2'> 
                             <select value={formData.furnished} name="furnished" onChange={handleChange} id="furnished" className='w-26 border p-3 rounded-lg'>
                                 <option value="Furnished">Furnished</option>

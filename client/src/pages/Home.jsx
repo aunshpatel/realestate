@@ -67,7 +67,7 @@ export default function Home() {
           Let's get started!
         </Link>
       </div>
-
+      {/* listing results for offer/sell/rent */}
       {/* swiper */}
       {/* Swiper for discounted price */}
       <Swiper navigation>
@@ -167,8 +167,6 @@ export default function Home() {
           </div>
         )}
       </div>
-
-      {/* listing results for offer/sell/rent */}
     </div>
   )
 }

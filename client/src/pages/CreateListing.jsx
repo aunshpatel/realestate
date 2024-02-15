@@ -28,7 +28,6 @@ export default function CreateListing() {
         furnished:'Furnished',
     });
     const [error, setError] = useState(false);
-    const [successMessage, setSuccessMessage] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleImageSubmit = (e)=>{
@@ -48,10 +47,12 @@ export default function CreateListing() {
                 setImageUploadError('Image Upload Failed!');
                 setUploading(false);
             });
-        } else if(files.length === 0){
+        } 
+        else if(files.length === 0){
             setImageUploadError('You have not selected any image! Please select at least 1 image!');
             setUploading(false);
-        }else {
+        } 
+        else {
             setImageUploadError('You can upload only upload a maximum of 6 images per listing!');
             setUploading(false);
         }
@@ -77,12 +78,9 @@ export default function CreateListing() {
                 newFile = uploadedImage;
             } 
             else{
-                // fileName = new Date().getTime() + file.name;
-                // newFile = file;
                 let tempName1, finalFileName;
                 if(file.name.includes(" ")) {
                     tempName1 = file.name.split(" ").join("");
-                    console.log("inside condition 1 tempName1:", tempName1);
                     if(tempName1.includes("(") && tempName1.includes(")")){
                         let tempName2, tempName3;
                         if(tempName1.includes("(")){
@@ -96,7 +94,8 @@ export default function CreateListing() {
                     else{
                         finalFileName = tempName1;
                     }
-                } else if(file.name.includes("(") && file.name.includes(")")){
+                } 
+                else if(file.name.includes("(") && file.name.includes(")")){
                     let tempName2, tempName3;
                     if(file.name.includes("(")){
                         tempName2 = file.name.split("(").join("");
@@ -105,7 +104,8 @@ export default function CreateListing() {
                         tempName3 = tempName2.split("(").join("");
                     }
                     finalFileName = tempName3;
-                } else {
+                } 
+                else {
                     finalFileName = file.name;
                 }
 
@@ -187,13 +187,6 @@ export default function CreateListing() {
                 })
             }
         }
-
-        // if(e.target.id === 'parking' || e.target.id === 'bedrooms' || e.target.id === 'bathrooms'){
-        //     setFormData({
-        //         ...formData,
-        //         [e.target.id]: e.target.value
-        //     })
-        // }
     }
 
     const handleSubmit = async (e) =>{
@@ -236,7 +229,6 @@ export default function CreateListing() {
             <form onSubmit={handleSubmit} className='flex flex-col'>
                 <div className='flex flex-col md:flex-row gap-6'>
                     <div className='flex flex-col gap-4 flex-1'>
-                        {/* <div className='flex flex-col gap-4 flex-1'> */}
                         <div className='flex flex-col gap-4'>
                             <input type='text' id='name' placeholder='Name' onChange={handleChange} value={formData.name} className='border p-3 rounded-lg' maxLength={62} minLength={3} required />
                             
@@ -265,7 +257,6 @@ export default function CreateListing() {
                                 <input type='number' id='regularPrice' min='50' max="1000000000" step='0.01' onChange={handleChange} value={formData.regularPrice} className='p-2 border border-gray-300 rounded-lg'/>
                                 <div className='flex flex-col items-center'>
                                     <p>Regular Price</p>
-                                    {/* <span className='text-xs'>(Monthly)</span> */}
                                     {
                                         formData.type === 'rent' && 
                                         (
@@ -282,7 +273,6 @@ export default function CreateListing() {
                                         <div>
                                             <div className='flex flex-col items-center'>
                                                 <p>Discounted Price</p>
-                                                {/* <span className='text-xs'>(Monthly)</span> */}
                                                 {
                                                     formData.type === 'rent' && 
                                                     (

@@ -55,7 +55,6 @@ export default function ListingItem({listing}) {
                     </div>
                 </div>
             </Link>
-
         </div>
     )
 }
