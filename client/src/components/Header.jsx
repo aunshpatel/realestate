@@ -90,39 +90,39 @@ export default function Header() {
             
             {
               currentUser ? (
-                <ul className='flex flex-col items-center justify-between min-h-[250px] sm:text-lg'>
+                <ul className='flex flex-col items-center justify-between min-h-[250px]'>
                     <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li className=''>Home</li>
+                      <li className='text-xl'>Home</li>
                     </Link>
                     <Link to='/about' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                        <li className=''>About</li>
+                        <li className='text-xl'>About</li>
                     </Link>
                     <Link to={"/create-listing"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li className=''>Create New Listing</li>
+                      <li className='text-xl'>Create New Listing</li>
                     </Link>
                     <Link to={"/my-listing"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li className=''>My Listings</li>
+                      <li className='text-xl'>My Listings</li>
                     </Link>
                     <Link to={"/all-listings"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li className=''>All Listings</li>
+                      <li className='text-xl'>All Listings</li>
                     </Link>
                     <Link to='/profile'>
                       <img className='rounded-full h-12 w-12 object-cover' src={currentUser.avatar} alt="Profile" onClick={() => setIsNavOpen(false)} />
                     </Link>
                 </ul>
               ):(
-                <ul className='flex flex-col gap-4 sm:text-lg'>
+                <ul className='flex flex-col gap-4'>
                     <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li>Home</li>
+                      <li className='text-xl'>Home</li>
                     </Link>
                     <Link to='/about' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                        <li>About</li>
+                        <li className='text-xl'>About</li>
                     </Link>
                     <Link to={"/all-listings"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li>All Listings</li>
+                      <li className='text-xl'>All Listings</li>
                     </Link>
                     <Link to='/sign-in' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
-                      <li>Sign In</li>
+                      <li className='text-xl'>Sign In</li>
                     </Link>
                 </ul>
               )
@@ -179,7 +179,7 @@ export default function Header() {
           display: block;
           position: absolute;
           width: 100%;
-          height: 100vh;
+          height: 80vh;
           top: 0;
           left: 0;
           background: white;
