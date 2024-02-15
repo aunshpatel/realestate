@@ -90,7 +90,7 @@ export default function Header() {
             
             {
               currentUser ? (
-                <ul className='flex flex-col items-center justify-between min-h-[250px] gap-4'>
+                <ul className='flex flex-col items-center min-h-[250px] gap-4'>
                     <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className='text-xl'>Home</li>
                     </Link>
@@ -111,7 +111,7 @@ export default function Header() {
                     </Link>
                 </ul>
               ):(
-                <ul className='flex flex-col items-center justify-between min-h-[250px] gap-4'>
+                <ul className='flex flex-col items-center min-h-[250px] gap-6'>
                     <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className='text-xl'>Home</li>
                     </Link>
