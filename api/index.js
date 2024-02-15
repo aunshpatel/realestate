@@ -5,6 +5,7 @@ import userRouters from './routes/userRoutes.js';
 import authRouter from './routes/authRoute.js';
 import listingRouter from './routes/listingRoute.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,9 @@ mongoose.connect(process.env.MongoDB).then(()=>{
     console.log(err);
 });
 
+const __dirname = path.resolve();
+
+
 app.listen(3000, ()=>{
     console.log('Server is running on port 3000!');
 });
@@ -26,6 +30,12 @@ app.listen(3000, ()=>{
 app.use("/api/user", userRouters);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 //Middleware for error message
 app.use((err, req, res, next)=>{
