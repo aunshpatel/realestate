@@ -11,8 +11,6 @@ const userSchema = Schema({
         type: String,
         required:true,
         unique:true,
-        // trim: true,
-        // lowercase: true,
     },
     password:{
         type: String,
@@ -25,8 +23,6 @@ const userSchema = Schema({
 }, {
     timestamps:true,
 });
-
-// module.exports = mongoose.model('User', userSchema);
 
 const User = mongoose.model('User', userSchema);
 
