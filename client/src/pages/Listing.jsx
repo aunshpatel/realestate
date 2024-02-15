@@ -42,14 +42,18 @@ export default function Listing() {
 
         fetchListing();
     }, [params.listingId]);
-
+    
     const handleListingDelete = async(listingID) => {
         try {
             const userData = await fetch(`/api/user/listings/${currentUser._id}`);
             const userDataJson = await userData.json();
             const storage = getStorage();
 
-            for(let i=0;i<userDataJson[0].imageUrls.length;i++){
+            const listingData = await fetch(`/api/listing/get/${listingID}`);
+            const listingDataJson = await listingData.json();
+            console.log("listingDataJson:",listingDataJson)
+            for(let i=0;i<listingDataJson.imageUrls.length;i++){
+                console.log('listingDataJson images:', listingDataJson.imageUrls.at(i));
                 const name = userDataJson[0].imageUrls.at(i);
                 const desertRef = ref(storage, name);
                 deleteObject(desertRef).then(() => {
@@ -69,9 +73,6 @@ export default function Listing() {
                 return;
             }
             navigate('/my-listing');
-            // setUserListings( 
-            //     (prev) => prev.filter((listing) => listing._id !== listingID)
-            // );
 
         } catch (error) {
             console.log(error.message);
