@@ -186,7 +186,7 @@ export default function Profile() {
         dispatch(deleteUserFailure(data.message));
         return;
       }
-      alert('Congratulations! Your account has been successfully deleted.');
+      alert('Goodbye! Your account has been successfully deleted.');
       dispatch(deleteUserSuccess(data));
 
     } catch(error){
