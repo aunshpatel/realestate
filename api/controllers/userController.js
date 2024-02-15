@@ -3,12 +3,6 @@ import Listing from "../../models/listingModel.js";
 import errorHandler from "../utils/error.js";
 import bcryptjs from "bcryptjs";
 
-export const test = (req, res)=>{
-    res.json({
-        message:'Hello world'
-    });
-};
-
 export const updateUser = async (req, res, next) => {
     if(req.user.id !== req.params.id) return next(errorHandler(401, "You can only update your account"));
     try{
