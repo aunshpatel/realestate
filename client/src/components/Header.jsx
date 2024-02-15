@@ -91,37 +91,37 @@ export default function Header() {
             {
               currentUser ? (
                 <ul className='flex flex-col items-center justify-between min-h-[250px] sm:text-lg'>
-                    <Link to='/' className="border-b border-gray-400 uppercase">
+                    <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className=''>Home</li>
                     </Link>
-                    <Link to='/about' className="border-b border-gray-400 uppercase">
+                    <Link to='/about' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                         <li className=''>About</li>
                     </Link>
-                    <Link to={"/create-listing"} className="border-b border-gray-400 uppercase">
+                    <Link to={"/create-listing"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className=''>Create New Listing</li>
                     </Link>
-                    <Link to={"/my-listing"} className="border-b border-gray-400 uppercase">
+                    <Link to={"/my-listing"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className=''>My Listings</li>
                     </Link>
-                    <Link to={"/all-listings"} className="border-b border-gray-400 uppercase">
+                    <Link to={"/all-listings"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li className=''>All Listings</li>
                     </Link>
                     <Link to='/profile'>
-                      <img className='rounded-full h-12 w-12 object-cover' src={currentUser.avatar} alt="Profile" />
+                      <img className='rounded-full h-12 w-12 object-cover' src={currentUser.avatar} alt="Profile" onClick={() => setIsNavOpen(false)} />
                     </Link>
                 </ul>
               ):(
-                <ul className='flex gap-4 sm:text-lg'>
-                    <Link to='/' className="border-b border-gray-400 uppercase">
+                <ul className='flex flex-col gap-4 sm:text-lg'>
+                    <Link to='/' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li>Home</li>
                     </Link>
-                    <Link to='/about' className="border-b border-gray-400 uppercase">
+                    <Link to='/about' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                         <li>About</li>
                     </Link>
-                    <Link to={"/all-listings"} className="border-b border-gray-400 uppercase">
+                    <Link to={"/all-listings"} className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li>All Listings</li>
                     </Link>
-                    <Link to='/sign-in' className="border-b border-gray-400 uppercase">
+                    <Link to='/sign-in' className="border-b border-gray-400 uppercase" onClick={() => setIsNavOpen(false)} >
                       <li>Sign In</li>
                     </Link>
                 </ul>
