@@ -160,8 +160,10 @@ export default function MyListing() {
             console.log("listingDataJson:",listingDataJson)
             for(let i=0;i<listingDataJson.imageUrls.length;i++){
                 console.log('listingDataJson images:', listingDataJson.imageUrls.at(i));
-                const name = userDataJson[0].imageUrls.at(i);
-                const desertRef = ref(storage, name);
+                // const name = userDataJson[0].imageUrls.at(i);
+                const imageName = listingDataJson.imageUrls.at(i);
+                console.log('listingDataJson images:', imageName);
+                const desertRef = ref(storage, imageName);
                 deleteObject(desertRef).then(() => {
                     console.log("Image Removed Successfully")
                 }).catch((error) => {
