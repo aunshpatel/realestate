@@ -91,7 +91,40 @@ export default function UpdateListing() {
                 newFile = uploadedImage;
             } 
             else{
-                fileName = new Date().getTime() + file.name;
+                // fileName = new Date().getTime() + file.name;
+                // newFile = file;
+                let tempName1, finalFileName;
+                if(file.name.includes(" ")) {
+                    tempName1 = file.name.split(" ").join("");
+                    console.log("inside condition 1 tempName1:", tempName1);
+                    if(tempName1.includes("(") && tempName1.includes(")")){
+                        let tempName2, tempName3;
+                        if(tempName1.includes("(")){
+                            tempName2 = tempName1.split("(").join("");
+                        }
+                        if(tempName2.includes(")")){
+                            tempName3 = tempName2.split(")").join("");
+                        }
+                        finalFileName = tempName3;
+                    }
+                    else{
+                        finalFileName = tempName1;
+                    }
+                } 
+                else if(file.name.includes("(") && file.name.includes(")")){
+                    let tempName2, tempName3;
+                    if(file.name.includes("(")){
+                        tempName2 = file.name.split("(").join("");
+                    }
+                    if(tempName2.includes(")")){
+                        tempName3 = tempName2.split("(").join("");
+                    }
+                    finalFileName = tempName3;
+                } else {
+                    finalFileName = file.name;
+                }
+
+                fileName = new Date().getTime() + finalFileName;
                 newFile = file;
             }
             const storageRef = ref(storage, fileName);
