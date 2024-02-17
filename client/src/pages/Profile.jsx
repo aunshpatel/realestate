@@ -257,7 +257,8 @@ export default function Profile() {
               <div className={`fixed top-0 left-0 w-full h-full flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`}>
                 <div className="bg-white shadow-md rounded-lg p-8">
                   <h2 className="text-xl font-semibold mb-4">Delete Profile</h2>
-                  <p className="mb-6">Are you sure you want to delete your profile?</p>
+                  <p className="mb-1">Are you sure you want to delete your profile?</p>
+                  <p className="mb-6">All your listings (if any) will be deleted too.</p>
                   <div className="flex justify-end">
                     <button className="bg-red-500 text-white px-4 py-2 rounded mr-4" onClick={handleDeleteUser}>Delete</button>
                     <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded" onClick={() => setIsOpen(false)}>Cancel</button>
