@@ -8,6 +8,8 @@ import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailur
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
   const fileRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -176,7 +178,7 @@ export default function Profile() {
       if(data.success === false){
         dispatch(deleteUserFailure(data.message));
         return;
-      }
+      }setIsOpen(false);
       alert('Goodbye! Your account has been successfully deleted.');
       dispatch(deleteUserSuccess(data));
 
@@ -203,48 +205,68 @@ export default function Profile() {
   }
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>
-        Profile
-      </h1>
+    <>
+      <div className={`${isOpen === false ? "p-3 max-w-lg mx-auto" : "hidden fixed w-[100%] h-[100%] top-0 left-0 right-0 bottom-0 z-2 cursor-pointer"}`}>
+        <h1 className='text-3xl font-semibold text-center my-7'>
+          Profile
+        </h1>
 
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+          <input type="file" onChange={ (e) => setFile(e.target.files[0]) } ref={fileRef} hidden accept='image/*, .heic'/>
 
-        <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-md h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
-        <p className='text-center font-semibold'>
-          {
-            updateSuccess===true ? "":(fileUploadError ? (<span className='text-red-700'>Image Upload Error!</span>) : 
-            filePerc > 0 && filePerc < 100 ? <span className='text-slate-700'>{`${filePerc}% Uploaded`}</span> : filePerc === 100 ? <span className='text-green-700'>Image uploaded successfully!</span> : "")
-          }
+          <img src={formData.avatar || currentUser.avatar} alt="Profile Picture" className='rounded-md h-24 w-24 object-cover cursor-pointer self-center mt-2' onClick={() =>fileRef.current.click()} />
+          <p className='text-center font-semibold'>
+            {
+              updateSuccess===true ? "":(fileUploadError ? (<span className='text-red-700'>Image Upload Error!</span>) : 
+              filePerc > 0 && filePerc < 100 ? <span className='text-slate-700'>{`${filePerc}% Uploaded`}</span> : filePerc === 100 ? <span className='text-green-700'>Image uploaded successfully!</span> : "")
+            }
+          </p>
+          <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
+          
+          <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
+          
+          <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
+          
+          <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
+            {loading ? 'Loading...' :  'Update'}
+          </button>
+        </form>
+        <p className='text-red-700 mt-5 text-center'>
+          {error ? error :''}
         </p>
-        <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
-        
-        <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
-        
-        <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
-        
-        <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
-          {loading ? 'Loading...' :  'Update'}
-        </button>
-      </form>
-      <p className='text-red-700 mt-5 text-center'>
-        {error ? error :''}
-      </p>
-      <p className='text-red-700 mt-5 text-center'>
-        {updateFail ? 'Profile failed to update!' :''}
-      </p>
-      <p className='text-green-700 mt-5 text-center'>
-        {updateSuccess ? 'Profile updated successfully!' :''}
-      </p>
-      <div className='flex justify-between mt-5'>
-        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>
-          Delete Account
-        </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
-          Sign Out
-        </span>
+        <p className='text-red-700 mt-5 text-center'>
+          {updateFail ? 'Profile failed to update!' :''}
+        </p>
+        <p className='text-green-700 mt-5 text-center'>
+          {updateSuccess ? 'Profile updated successfully!' :''}
+        </p>
+        <div className='flex justify-between mt-5'>
+          {/* <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'> */}
+          <span onClick={() => {setIsDeleting(true);setIsOpen(true);}} className='text-red-700 cursor-pointer'>
+            Delete Account
+          </span>
+          <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
+            Sign Out
+          </span>
+        </div>
+
+      
+    </div>
+      <div>
+        { isDeleting === true && (
+              <div className={`fixed top-0 left-0 w-full h-full flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`}>
+                <div className="bg-white shadow-md rounded-lg p-8">
+                  <h2 className="text-xl font-semibold mb-4">Delete Profile</h2>
+                  <p className="mb-6">Are you sure you want to delete your profile?</p>
+                  <div className="flex justify-end">
+                    <button className="bg-red-500 text-white px-4 py-2 rounded mr-4" onClick={handleDeleteUser}>Delete</button>
+                    <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded" onClick={() => setIsOpen(false)}>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            )
+          }
       </div>
-   </div>
+    </>
   )
 }
