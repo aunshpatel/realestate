@@ -104,7 +104,7 @@ export default function Listing() {
                 </div>
                 { copied && ( <p className='fixed top-[19%] right-[3%] z-10 rounded-md bg-slate-100 p-2'>Link Copied!</p> ) }
 
-                <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-6'>
+                <div className='flex flex-col max-w-4xl mx-auto p-1 my-7 gap-6'>
                     <p className='text-2xl'>
                         <span className=' font-semibold'>{listing.name} </span> - {
                             listing.discount ? 
@@ -116,7 +116,10 @@ export default function Listing() {
                             <span>$ {listing.regularPrice.toLocaleString('en-US')}</span>
                         } { listing.type === 'rent' && '/ month'}
                     </p>
-                    
+                    <p className='text-slate-800 font-semibold'>
+                        {/* <span className='font-semibold text-black'>Description:</span>  */}
+                        {listing.description}
+                    </p>
                     <p className='flex items-center gap-2 text-slate-600 my-1 text-md'>
                         <FaMapMarkerAlt className='text-green-700'/>
                         <a href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
@@ -124,9 +127,9 @@ export default function Listing() {
                         </a>
                     </p>
 
-                    <div>
+                    {/* <div>
                         
-                    </div>
+                    </div> */}
                     <div className='flex gap-4'>
                         {listing.type === 'rent' ? 
                             <p className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
@@ -145,9 +148,12 @@ export default function Listing() {
                         }
                     </div>
 
-                    <p className='text-slate-800 '>
+                    <div>
+                        
+                    </div>
+                    {/* <p className='text-slate-800 '>
                         <span className='font-semibold text-black'>Description:</span> {listing.description}
-                    </p>
+                    </p> */}
                     <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm'>
                         <li className='flex items-center gap-1 whitespace-nowrap'>
                             <FaBed className='text-lg' /> {listing.bedrooms} {listing.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
