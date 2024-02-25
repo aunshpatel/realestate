@@ -351,12 +351,14 @@ export default function UpdateListing() {
                     </div>
                 </div>
 
-                <div className='flex flex-col md:flex-row justify-center p-2 w-full'>
+                <div className='flex flex-col justify-center p-2 w-full'>
                     {/* uploading stands for image uploading */}
+                    <div className='w-full flex flex-row justify-center pb-4'>
+                        { error && <p className='text-red-700 text-sm'>{error}</p> }
+                    </div>
                     <button disabled={loading || uploading} className='p-3 bg-slate-700 text-white rounded-lg uppercase w-full hover:opacity-95 disabled:opacity-80'>
                         {loading ? 'Updating...':'Update Listing'}
                     </button>
-                    { error && <p className='text-red-700 text-sm'>{error}</p> }
                 </div>
             </form>
         </main>
