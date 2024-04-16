@@ -178,7 +178,19 @@ export default function Profile() {
       if(data.success === false){
         dispatch(deleteUserFailure(data.message));
         return;
-      }setIsOpen(false);
+      }
+      if(currentUser.avatar.includes('firebase')){
+        const storage = getStorage();
+        const desertRef = ref(storage, currentUser.avatar);
+        deleteObject(desertRef).then(() => {
+          console.log("Image Removed Successfully")
+        }).catch((error) => {
+          console.log("Failed To Remove Image");
+            console.log(error)
+        });
+      }
+      
+      setIsOpen(false);
       alert('Goodbye! Your account has been successfully deleted.');
       dispatch(deleteUserSuccess(data));
 
