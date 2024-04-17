@@ -16,6 +16,8 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updateFail, setUpdateFail] = useState(false);
+  const [oldFirebaseProfilePic, setOldFirebaseProfilePic] = useState('');
+  const [newFirebaseProfilePic, setNewFirebaseProfilePic] = useState('');
   const dispatch = useDispatch(); 
 
   useEffect(()=>{
@@ -23,6 +25,12 @@ export default function Profile() {
       handleFileUpload(file);
     }
   }, [file]);
+
+  useEffect(()=>{
+    if(currentUser.avatar.includes('firebase')){
+      setOldFirebaseProfilePic(`${currentUser.avatar}`)
+    }
+  }, []);
 
   const handleFileUpload = async (file) =>{
     const storage = getStorage(app);
@@ -92,6 +100,7 @@ export default function Profile() {
     ()=>{
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
         setFormData({...formData, avatar:downloadURL});
+        setNewFirebaseProfilePic(`${downloadURL}`);
       });
     });
   }
@@ -117,6 +126,18 @@ export default function Profile() {
         alert('Failed to update data');
         setUpdateFail(true);
         return;
+      }
+
+      if(oldFirebaseProfilePic.includes('firebase') && newFirebaseProfilePic.includes('firebase')){
+        const storage = getStorage();
+        const desertRef = ref(storage, oldFirebaseProfilePic);
+        deleteObject(desertRef).then(() => {
+            console.log("Image Updated Successfully and Old Image Removed");
+            setOldFirebaseProfilePic(`${newFirebaseProfilePic}`);
+        }).catch((error) => {
+            console.log("Failed To Remove Image With Error: ",error);
+            // console.log(error)
+        });
       }
 
       dispatch(updateUserSuccess(data));
