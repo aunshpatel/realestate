@@ -2,7 +2,7 @@
 
 // Initialize WebSocket server
 import { Server } from 'ws';
-const wss = new Server({ port: 8080 });
+const wss = new Server({ port: process.env.PORT || 8080 });
 
 // Handle WebSocket connections
 wss.on('connection', function connection(ws) {
