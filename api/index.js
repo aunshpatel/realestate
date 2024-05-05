@@ -6,6 +6,8 @@ import authRouter from './routes/authRoute.js';
 import listingRouter from './routes/listingRoute.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+const websocketServer = require('./websocket-server');
+
 dotenv.config();
 
 const app = express();
