@@ -160,9 +160,7 @@ export default function Search() {
                                 <option value="createdAt_asc">Oldest First</option>
                             </select>
                         </div>
-                        <div className='flex flex-wrap items-center gap-2'>
-                            <label className='font-semibold text-red-600 text-sm'>Please make sure to press the "Search" button to apply the filter(s)!</label>
-                        </div>
+                        <label className='font-semibold text-red-600 text-sm'>Please make sure to press the "Search" button to apply the filter(s)!</label>
                         <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
                             Search
                         </button>
