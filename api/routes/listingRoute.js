@@ -9,7 +9,7 @@ router.delete('/delete/:id', verifyToken, deleteListing);
 router.post('/update/:id', verifyToken, updateListing);
 
 //Individual listing
-router.get('/get/:id', getListing);
+router.get('/get/:id', verifyToken, getListing);
 
 //Multiple listings
 router.get('/get', getListings)
