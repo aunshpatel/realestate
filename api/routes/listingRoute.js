@@ -8,7 +8,7 @@ router.post('/create', verifyToken, createListing);
 router.delete('/delete/:id', verifyToken, deleteListing);
 router.post('/update/:id', verifyToken, updateListing);
 
-//Individual listing
+//This will get the data of an Individual listing
 router.get('/get/:id', verifyToken, getListing);
 
 //Multiple listings
