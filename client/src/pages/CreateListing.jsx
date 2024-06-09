@@ -335,13 +335,15 @@ export default function CreateListing() {
                         </div>
                     </div>
                 </div>
-
+                <div className='flex flex-col md:flex-row justify-center p-2 w-full'>
+                    { error && <p className='text-red-700 text-md'>{error}</p> }
+                </div>
                 <div className='flex flex-col md:flex-row justify-center p-2 w-full'>
                     {/* uploading stands for image uploading */}
                     <button disabled={loading || uploading} className='p-3 bg-slate-700 text-white rounded-lg uppercase w-full hover:opacity-95 disabled:opacity-80'>
                         {loading ? 'Creating...':'Create Listing'}
                     </button>
-                    { error && <p className='text-red-700 text-sm'>{error}</p> }
+                    {/* { error && <p className='text-red-700 text-sm'>{error}</p> } */}
                 </div>
             </form>
         </main>
