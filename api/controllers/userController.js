@@ -20,7 +20,6 @@ export const updateUser = async (req, res, next) => {
         }, { new: true });
 
         const {password,...rest} = updatedUser._doc;
-        res.cookie('access_token', token, {httpOnly:true, expires: new Date(Date.now() + 60*60*24*365)}).status(200).json(rest);
         res.status(200).json(rest);
     } catch(error) {
         next(error);
