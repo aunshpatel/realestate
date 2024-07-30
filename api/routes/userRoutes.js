@@ -11,7 +11,7 @@ router.delete('/delete/:id', verifyToken, deleteUser);
 // router.get("/listings/:id", verifyToken, getUserListings);
 router.get("/listings/:id", getUserListings);
 
-router.get('/:id', verifyToken, getUser);
+router.get('/profile/:id', verifyToken, getUser);
 
 export default router;
 // module.exports = router;
