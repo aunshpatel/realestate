@@ -8,6 +8,15 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  function passwordToggle() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
   const handleChange = (e) =>{
     setFormData({
       ...formData, 
@@ -60,6 +69,10 @@ export default function SignUp() {
         <input type="email" name="email" id="email" placeholder='Email' className='border p-3 rounded-lg'  onChange={handleChange}/>
 
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
+          
+          <div className='flex flex-row justify-center float-right'>
+            <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
+          </div>
 
         <button disabled={loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:placeholder-opacity-80' onChange={handleChange}>
           {loading?'Loading':'Sign Up'}
