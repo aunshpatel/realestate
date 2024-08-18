@@ -4,6 +4,7 @@ import { ref, getDownloadURL, getStorage, uploadBytesResumable, deleteObject } f
 import { app } from '../firebase';
 import heic2any from 'heic2any';
 import { useNavigate } from 'react-router-dom';
+import { currencies } from '../components/currencyList.jsx';
 
 
 export default function CreateListing() {
@@ -19,6 +20,7 @@ export default function CreateListing() {
         description:'',
         address:'',
         type:'rent',
+        selectedCurrency:'',
         bedrooms:1,
         bathrooms:1,
         regularPrice:50,
@@ -29,6 +31,7 @@ export default function CreateListing() {
     });
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [selectedCurrency, setSelectedCurrency] = useState('');
 
     const handleImageSubmit = (e)=>{
         if(files.length > 0 && (files.length+formData.imageUrls.length) < 7){
@@ -252,7 +255,17 @@ export default function CreateListing() {
                                 <input type='checkbox' id='discount' className='w-5' onChange={handleChange} checked={formData.discount} /> 
                                 <span className='flex items-center'>Discount</span>
                             </div>
-
+                            <div className="w-80 h-8">
+                                {/* <label htmlFor="currency">Select Currency:</label> */}
+                                <select className='w-26 border p-3 rounded-lg' id="currency" value={selectedCurrency} onChange={(e) => { formData.selectedCurrency = e.target.value; setSelectedCurrency(e.target.value); }} animate={{ mount: { y: 0 }, unmount: { y: 25 } }} required>
+                                    <option value="">Select a Currency</option>
+                                    {currencies.map(currency => (
+                                    <option key={currency.code} value={currency.code}>
+                                        {currency.code} - {currency.name}
+                                    </option>
+                                    ))}
+                                </select>
+                            </div>
                             <div className='flex items-center gap-2'>
                                 <input type='number' id='regularPrice' min='50' max="1000000000" step='0.01' onChange={handleChange} value={formData.regularPrice} className='p-2 border border-gray-300 rounded-lg'/>
                                 <div className='flex flex-col items-center'>

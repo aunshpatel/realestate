@@ -13,6 +13,10 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    selectedCurrency:{
+        type: String,
+        required: true
+    },
     regularPrice:{
         type: Number,
         required: true
