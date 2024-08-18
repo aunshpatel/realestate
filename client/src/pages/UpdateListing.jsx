@@ -4,6 +4,7 @@ import { ref, getDownloadURL, getStorage, uploadBytesResumable, deleteObject } f
 import { app } from '../firebase';
 import heic2any from 'heic2any';
 import { useNavigate, useParams } from 'react-router-dom';
+import { currencies } from '../components/currencyList.jsx';
 
 export default function UpdateListing() {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function UpdateListing() {
         description:'',
         address:'',
         type:'rent',
+        selectedCurrency:'',
         bedrooms:1,
         bathrooms:1,
         regularPrice:50,
@@ -26,9 +28,9 @@ export default function UpdateListing() {
         parking:0,
         furnished:'Furnished',
     });
-    
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [selectedCurrency, setSelectedCurrency] = useState('');
 
     useEffect(() => {
         const fetchListing = async() => {
@@ -265,6 +267,17 @@ export default function UpdateListing() {
                             <div className='flex gap-2'> 
                                 <input type='checkbox' id='discount' className='w-5' onChange={handleChange} checked={formData.discount} /> 
                                 <span className='flex items-center'>Discount</span>
+                            </div>
+
+                            <div className="w-80 h-8">
+                                <select className='w-26 border p-3 rounded-lg' id="currency" value={formData.selectedCurrency} onChange={(e) => { formData.selectedCurrency = e.target.value; setSelectedCurrency(e.target.value); }} animate={{ mount: { y: 0 }, unmount: { y: 25 } }} required>
+                                    <option value="">Select a Currency</option>
+                                    {currencies.map(currency => (
+                                    <option key={currency.code} value={currency.code}>
+                                        {currency.code} - {currency.name}
+                                    </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className='flex items-center gap-2'>
