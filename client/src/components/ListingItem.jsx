@@ -22,10 +22,10 @@ export default function ListingItem({listing}) {
                         {
                             listing.discount ? 
                                 <span> 
-                                    <span className='line-through'>$ {listing.regularPrice.toLocaleString('en-US')} </span> ${listing.discountPrice.toLocaleString('en-US')}
+                                    <span className='line-through'>{listing.selectedCurrency} {listing.regularPrice.toLocaleString('en-US')}</span> {listing.selectedCurrency} {listing.discountPrice.toLocaleString('en-US')}
                                 </span> : 
                                 <span>
-                                    $ {listing.regularPrice.toLocaleString('en-US')}
+                                    {listing.selectedCurrency} {listing.regularPrice.toLocaleString('en-US')}
                                 </span>
                         }
                         {listing.type === 'rent' && ' / month'}
