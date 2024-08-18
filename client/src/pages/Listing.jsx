@@ -117,19 +117,18 @@ export default function Listing() {
                         } { listing.type === 'rent' && '/ month'}
                     </p>
                     <p className='text-slate-800 font-semibold'>
-                        {/* <span className='font-semibold text-black'>Description:</span>  */}
                         {listing.description}
                     </p>
-                    <p className='flex items-center gap-2 text-slate-600 my-1 text-md'>
-                        <FaMapMarkerAlt className='text-green-700'/>
-                        <a href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
-                            {listing.address}
-                        </a>
+                    <p className='items-center gap-2 text-slate-600 my-1 text-md'>
+                        To view the address in maps, click on the below address:
+                        <br />
+                        <p className='flex items-center gap-2'>
+                            <FaMapMarkerAlt className='text-green-700'/>
+                            <a className='underline' href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
+                                {listing.address}
+                            </a>
+                        </p>
                     </p>
-
-                    {/* <div>
-                        
-                    </div> */}
                     <div className='flex gap-4'>
                         {listing.type === 'rent' ? 
                             <p className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
@@ -147,13 +146,6 @@ export default function Listing() {
                             )
                         }
                     </div>
-
-                    <div>
-                        
-                    </div>
-                    {/* <p className='text-slate-800 '>
-                        <span className='font-semibold text-black'>Description:</span> {listing.description}
-                    </p> */}
                     <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm'>
                         <li className='flex items-center gap-1 whitespace-nowrap'>
                             <FaBed className='text-lg' /> {listing.bedrooms} {listing.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
