@@ -96,7 +96,7 @@ export default function Listing() {
                 
                 <div className='flex flex-col max-w-4xl mx-auto p-1 my-7 gap-6'>
                     <div className='flex gap-4'>
-                        <button className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md' onClick = {() =>{
+                        <button className='bg-slate-500 w-full max-w-[140px] text-white text-center p-2 rounded-md' onClick = {() =>{
                             navigator.clipboard.writeText(window.location.href);
                             setCopied(true);
                             setTimeout(() => {
