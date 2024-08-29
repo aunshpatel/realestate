@@ -9,7 +9,8 @@ router.post('/create', createListing);
 // router.delete('/delete/:id', verifyToken, deleteListing);
 router.delete('/delete/:id', deleteListing);
 
-router.post('/update/:id', verifyToken, updateListing);
+// router.post('/update/:id', verifyToken, updateListing);
+router.post('/update/:id', updateListing);
 
 //This will get the data of an Individual listing
 // router.get('/get/:id', verifyToken, getListing);
