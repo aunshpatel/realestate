@@ -114,11 +114,11 @@ export default function Listing() {
                         <span className=' font-semibold'>{listing.name} </span> - {
                             listing.discount ? 
                             <span>
-                                <span style={{textDecoration: 'line-through'}}>{listing.selectedCurrency} {listing.regularPrice.toLocaleString('en-US')}</span> &nbsp;
-                                {listing.selectedCurrency} {listing.discountPrice.toLocaleString('en-US')}
+                                <span style={{textDecoration: 'line-through'}}>{listing.selectedCurrency.split(' - ')[0]} {listing.regularPrice.toLocaleString('en-US')}</span> &nbsp;
+                                {listing.selectedCurrency.split(' - ')[0]} {listing.discountPrice.toLocaleString('en-US')}
                             </span> 
                             :
-                            <span>{listing.selectedCurrency} {listing.regularPrice.toLocaleString('en-US')}</span>
+                            <span>{listing.selectedCurrency.split(' - ')[0]} {listing.regularPrice.toLocaleString('en-US')}</span>
                         } { listing.type === 'rent' && '/ month'}
                     </p>
                     <p className='text-slate-800 font-semibold'>
@@ -146,7 +146,7 @@ export default function Listing() {
                         {
                             listing.discount && (
                                 <p className='bg-blue-600 w-ful max-w-[200px] text-white text-center p-2 rounded-md'>
-                                    {listing.selectedCurrency} {(listing.regularPrice - listing.discountPrice).toLocaleString('en-US')} Discount
+                                    {listing.selectedCurrency.split(' - ')[0]} {(listing.regularPrice - listing.discountPrice).toLocaleString('en-US')} Discount
                                 </p>
                             )
                         }
