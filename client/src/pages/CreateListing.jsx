@@ -259,7 +259,7 @@ export default function CreateListing() {
                                 <select className='w-26 border p-3 rounded-lg' id="currency" value={selectedCurrency} onChange={(e) => { formData.selectedCurrency = e.target.value; setSelectedCurrency(e.target.value); }} animate={{ mount: { y: 0 }, unmount: { y: 25 } }} required>
                                     <option value="">Select a Currency</option>
                                     {currencies.map(currency => (
-                                    <option key={currency.code} value={currency.code}>
+                                    <option key={currency.code + ' - ' + currency.name} value={currency.code + ' - ' + currency.name}>
                                         {currency.code} - {currency.name}
                                     </option>
                                     ))}
