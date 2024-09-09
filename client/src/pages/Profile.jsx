@@ -256,6 +256,8 @@ export default function Profile() {
           </p>
           <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
           
+          <input type="text" id="fullname" placeholder='Full Name' defaultValue={currentUser.fullname} className='border p-3 rounded-lg' onChange={handleChange} />
+
           <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
           
           <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
