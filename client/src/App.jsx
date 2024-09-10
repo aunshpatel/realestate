@@ -11,6 +11,7 @@ import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 import MyListing from './pages/MyListing';
+import DeleteProfileInstructions from './pages/DeleteProfileInstructions';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/about" element={<About />} />
         <Route path="/listing/:listingId" element={<Listing />} />
+        <Route path="/delete-profile-instructions" element={<DeleteProfileInstructions />} />
         <Route path="/all-listings" element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
