@@ -12,6 +12,7 @@ import Listing from './pages/Listing';
 import Search from './pages/Search';
 import MyListing from './pages/MyListing';
 import DeleteProfileInstructions from './pages/DeleteProfileInstructions';
+import MobileAppPrivacyPolicy from './pages/MobileAppPrivacyPolicy';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/listing/:listingId" element={<Listing />} />
         <Route path="/delete-profile-instructions" element={<DeleteProfileInstructions />} />
+        <Route path="/mobileapp-privacy-policy" element={<MobileAppPrivacyPolicy />} />
         <Route path="/all-listings" element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
