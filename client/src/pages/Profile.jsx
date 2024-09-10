@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import heic2any from 'heic2any';
 import {getDownloadURL, getStorage, ref, uploadBytesResumable, deleteObject} from 'firebase/storage';
 import { app } from '../firebase';
-import { countryCode } from '../components/CountryCode';
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailure, updateUserStart, updateUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from '../redux/user/userSlice';
 
 export default function Profile() {
@@ -19,7 +18,6 @@ export default function Profile() {
   const [updateFail, setUpdateFail] = useState(false);
   const [oldFirebaseProfilePic, setOldFirebaseProfilePic] = useState('');
   const [newFirebaseProfilePic, setNewFirebaseProfilePic] = useState('');
-  const [countrycode, setCountryCode] = useState("");
   const dispatch = useDispatch(); 
 
   useEffect(()=>{
@@ -259,18 +257,6 @@ export default function Profile() {
           <input type="text" id="username" placeholder='Username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} />
           
           <input type="text" id="fullname" placeholder='Full Name' defaultValue={currentUser.fullname} className='border p-3 rounded-lg' onChange={handleChange} />
-
-          <div className='flex space-x-16'>
-            <select className='w-2/5 border p-3 rounded-lg' id="countrycode" value={currentUser.countrycode} onChange={(e) => { formData.countrycode = e.target.value; setCountryCode(e.target.value); }} animate={{ mount: { y: 0 }, unmount: { y: 25 } }} required>
-                <option value="">Country Code</option>
-                {countryCode.map(countryCode => (
-                <option key={countryCode.name + " (" + countryCode.code + ")"} value={countryCode.name + " (" + countryCode.code + ")"}>
-                    {countryCode.name + " (" + countryCode.code + ")"}
-                </option>
-                ))}
-            </select>
-            <input type="number" name="mobile" id="mobile" value={currentUser.mobile} placeholder='Mobile Number' className='w-3/5 border p-3 rounded-lg'  onChange={handleChange}/>
-          </div>
 
           <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
           
