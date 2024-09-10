@@ -11,14 +11,6 @@ const userSchema = Schema({
         type: String,
         required:true,
     },
-    countrycode:{
-        type: String,
-        required:true,
-    },
-    mobile:{
-        type: Number,
-        required:true,
-    },
     email:{
         type: String,
         required:true,

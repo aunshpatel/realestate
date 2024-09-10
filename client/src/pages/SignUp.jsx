@@ -1,13 +1,11 @@
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import OAuth from '../components/OAuth';
-import { countryCode } from '../components/CountryCode';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [countrycode, setCountryCode] = useState("");
   const navigate = useNavigate();
 
   function passwordToggle() {
@@ -68,23 +66,7 @@ export default function SignUp() {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input type="text" name="username" id="username" placeholder='Username' className='border p-3 rounded-lg' onChange={handleChange}/>
 
-        <input type="text" name="fullname" id="fullname" placeholder='Full Name' className='border p-3 rounded-lg'  onChange={handleChange}/> 
-
-        
-
-        <div className='flex space-x-16'>
-          <select className='w-2/5 border p-3 rounded-lg' id="countryCode" value={countrycode} onChange={(e) => { formData.countrycode = e.target.value; setCountryCode(e.target.value); }} animate={{ mount: { y: 0 }, unmount: { y: 25 } }} required>
-              <option value="">Country Code</option>
-              {countryCode.map(countryCode => (
-              <option key={countryCode.name + " (" + countryCode.code + ")"} value={countryCode.name + " (" + countryCode.code + ")"}>
-                  {countryCode.name + " (" + countryCode.code + ")"}
-              </option>
-              ))}
-          </select>
-          <input type="number" name="mobile" id="mobile" placeholder='Mobile Number' className='w-3/5 border p-3 rounded-lg'  onChange={handleChange}/>
-        </div>
-
-       
+        <input type="text" name="fullname" id="fullname" placeholder='Full Name' className='border p-3 rounded-lg'  onChange={handleChange}/>  
 
         <input type="email" name="email" id="email" placeholder='Email' className='border p-3 rounded-lg'  onChange={handleChange}/>
 
