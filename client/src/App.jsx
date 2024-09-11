@@ -13,6 +13,7 @@ import Search from './pages/Search';
 import MyListing from './pages/MyListing';
 import DeleteProfileInstructions from './pages/DeleteProfileInstructions';
 import MobileAppPrivacyPolicy from './pages/MobileAppPrivacyPolicy';
+import ContactUs from './pages/ContactUs';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/delete-profile-instructions" element={<DeleteProfileInstructions />} />
         <Route path="/mobileapp-privacy-policy" element={<MobileAppPrivacyPolicy />} />
         <Route path="/all-listings" element={<Search />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/create-listing' element={<CreateListing />} />
