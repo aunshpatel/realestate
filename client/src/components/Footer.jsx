@@ -7,7 +7,7 @@ import appStore from "../assets/images/coming-soon-to-apple.jpeg";
 export default function Footer() {
     return(
         <>
-            <div className='flex justify-between bg-slate-200 h-[100px] w-[100%] fixed bottom-0'>
+            <div className='flex justify-between bg-slate-200 h-[76px] w-[100%] fixed bottom-0 z-10'>
                 <div className="flex items-center p-4">
                     <ul className='flex space-x-8'>
                         <Link to='/mobileapp-privacy-policy' className="border-b border-gray-400 uppercase">

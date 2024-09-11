@@ -3,7 +3,7 @@ import React from 'react';
 export default function DeleteProfileInstructions() {
     return(
         <>
-            <div className='justify-center items-center flex flex-col mb-6 mt-6'>
+            <div className='justify-center items-center flex flex-col mb-6 pb-20 mt-6'>
                 <div className="bg-white justify-center items-center  shadow-md rounded-lg p-8">
                     <h1 className="text-xl font-bold mb-4">Instructions to Delete Profile</h1>
                     <h2 className="text-lg font-bold mb-1">

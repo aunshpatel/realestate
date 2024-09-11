@@ -236,7 +236,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className={`${isOpen === false ? "p-3 max-w-lg mx-auto" : "hidden fixed w-[100%] h-[100%] top-0 left-0 right-0 bottom-0 z-2 cursor-pointer"}`}>
+      <div className={`${isOpen === false ? "pb-32 p max-w-lg mx-auto" : "hidden fixed w-[100%] h-[100%] top-0 left-0 right-0 bottom-0 z-2 pb-10 cursor-pointer"}`}>
         <h1 className='text-3xl font-semibold text-center my-7'>
           Profile
         </h1>
