@@ -226,11 +226,11 @@ export default function CreateListing() {
     }
 
     return (
-        <main className='p-3 max-w-4xl mx-auto'>
+        <main className='p-3 max-w-4xl mx-auto pb-40'>
             <h1 className='text-3xl font-semibold text-center my-7'>Create A Listing</h1>
 
             <form onSubmit={handleSubmit} className='flex flex-col'>
-                <div className='flex flex-col md:flex-row gap-6'>
+                <div className='flex flex-col md:flex-row gap-6 pb-10'>
                     <div className='flex flex-col gap-4 flex-1'>
                         <div className='flex flex-col gap-4'>
                             <input type='text' id='name' placeholder='Name' onChange={handleChange} value={formData.name} className='border p-3 rounded-lg' maxLength={62} minLength={3} required />

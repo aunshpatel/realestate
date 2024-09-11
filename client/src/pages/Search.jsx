@@ -109,7 +109,7 @@ export default function Search() {
     }
 
     return (
-        <div className='flex flex-col px-7'>
+        <div className='flex flex-col px-7 pb-40'>
             <h1 className='text-3xl font-semibold rounded-md w-full text-center p-4 text-slate-700 mt-5'>All Listings</h1>
             <div className='flex flex-col md:flex-row md:max-h-[750px]'>
                 <div className='py-7 px-4 h-fit md:w-[250px] border-2 rounded-lg'>
