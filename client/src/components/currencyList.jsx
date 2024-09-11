@@ -113,7 +113,6 @@ export const currencies = [
     {code:'PHP(₱)', name:'Philippine Peso'},
     {code:'PKR(Rs)', name:'Pakistani Rupee'},
     {code:'PLN(zł)', name:'Polish Złoty'},
-    // {code:'PRB()', name:'Transnistrian Ruble'},
     {code:'PYG(Gs)', name:'Paraguayan Guaraní'},
     {code:'QAR(﷼)', name:'Qatari Riyal'},
     {code:'RON(lei)', name:'Romanian Leu'},

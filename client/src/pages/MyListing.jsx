@@ -10,7 +10,6 @@ import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function MyListing() {
-    // const [listing, setListing] = React.useState(null);
     const [showListingsError, setShowListingsError] = React.useState(false);
     const {currentUser} = useSelector((state) => state.user);
     const [userListings, setUserListings] = React.useState([]);

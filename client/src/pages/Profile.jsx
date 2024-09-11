@@ -50,8 +50,6 @@ export default function Profile() {
       newFile = uploadedImage;
     } 
     else{
-      // fileName = new Date().getTime() + file.name;
-      // newFile = file;
       let tempName1, finalFileName;
       if(file.name.includes(" ")) {
         tempName1 = file.name.split(" ").join("");
@@ -136,7 +134,6 @@ export default function Profile() {
             setOldFirebaseProfilePic(`${newFirebaseProfilePic}`);
         }).catch((error) => {
             console.log("Failed To Remove Image With Error: ",error);
-            // console.log(error)
         });
       }
 
@@ -276,7 +273,6 @@ export default function Profile() {
           {updateSuccess ? 'Profile updated successfully!' :''}
         </p>
         <div className='flex justify-between mt-5'>
-          {/* <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'> */}
           <span onClick={() => {setIsDeleting(true);setIsOpen(true);}} className='text-red-700 cursor-pointer'>
             Delete Account
           </span>

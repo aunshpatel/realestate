@@ -54,7 +54,6 @@ export default function Home() {
     <div className='pb-20'>
       {/* top */}
       <div className='flex flex-col gap-6 p-40 px-3 max-w-6xl mx-auto'>
-          {/* style={{background:`url(${"/src/assets/images/pexels-pixabay-221540.jpeg"}) center no-repeat`, backgroundSize:'100%'}}> */}
         <h1 className='text-slate-900 font-bold text-3xl lg:text-5xl'>
           Find your next <span className='text-slate-400'>humble adobe</span> <br />
           with ease.
