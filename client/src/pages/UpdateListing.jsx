@@ -25,6 +25,8 @@ export default function UpdateListing() {
         regularPrice:50,
         discountPrice:0,
         discount:false,
+        isFlagged: false,
+        flaggedReason:'',
         parking:0,
         furnished:'Furnished',
     });

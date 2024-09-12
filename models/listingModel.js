@@ -49,6 +49,15 @@ const listingSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    isFlagged:{
+        type: Boolean,
+        // required: true,
+        default: false
+    },
+    flaggedReason: {
+        type: String,
+        default:'',
+    },
     imageUrls:{
         type: Array,
         // required: true
