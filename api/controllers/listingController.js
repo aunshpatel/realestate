@@ -94,11 +94,14 @@ export const getListings = async(req, res, next) => {
 
     const order = req.query.order || 'desc';
 
+    let isFlagged = req.query.isFlagged === 'false';
+
     const listings = await Listing.find({
       name: { $regex: searchTerm, $options: 'i' },
       discount,
       furnished,
-      type
+      type,
+      isFlagged
     }).sort({[sort]: order }).limit(limit).skip(startIndex);
 
     return res.status(200).json(listings);
