@@ -196,11 +196,14 @@ export default function MyListing() {
                 <table className='my-7'>
                     <thead>
                         <tr className='border p-3 flex items-center gap-4'>
+                        <th className='w-20'>
+                                Sr. No
+                            </th>
                             <th className='w-20'>
                                 Image
                             </th>
                             <th>
-                                Title
+                                Listing Name
                             </th>
                             <th>
 
@@ -211,6 +214,11 @@ export default function MyListing() {
                         (rowsPerPage > 0 ? userListings.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : userListings).map((listing, index) =>(
                             <tbody>
                                 <tr key={listing._id} className='border p-3 flex items-center gap-4 hover:bg-gray-50'>
+                                <td className='w-20'>
+                                        <p className='flex justify-center'>
+                                            {index + 1}
+                                        </p>
+                                    </td>
                                     <td className='w-20'>
                                         <Link to={`/listing/${listing._id}`}>
                                             <img src={listing.imageUrls[0]} alt='Listing Cover Image' className='h-20 w-20 object-contain rounded-lg'/>
