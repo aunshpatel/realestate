@@ -286,13 +286,13 @@ export default function Listing() {
                     </ul>
                     {
                         currentUser && listing.userRef === currentUser._id && (
-                            <div className='flex flex-wrap items-center gap-4 sm:gap-6'>
-                                <button onClick={() => handleListingDelete(listing._id)} className='bg-red-900 w-full max-w-[200px] text-white text-center p-2 rounded-md uppercase'>
+                            <div className='flex flex-wrap items-center gap-4 sm:gap-6 pb-20'>
+                                <button onClick={() => handleListingDelete(listing._id)} className='bg-red-900 w-[50%] text-white text-center p-2 rounded-md uppercase hover:opacity-95'>
                                     Delete Listing
                                 </button>
                                 
-                                <Link to={`/update-listing/${listing._id}`}>
-                                    <button className='bg-green-900 w-[200px] text-white text-center p-2 rounded-md uppercase'>
+                                <Link to={`/update-listing/${listing._id}`}  className='bg-green-900 w-[50%] text-white text-center p-2 rounded-md hover:opacity-95'>
+                                    <button className='uppercase'>
                                         Edit Listing
                                     </button>
                                 </Link>
@@ -301,11 +301,13 @@ export default function Listing() {
                     }
                     {
                         currentUser && listing.userRef !== currentUser._id && !contact &&(
-                            <button onClick={ () => setContact(true)} className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'>
+                            <div className='pb-20'>
+                                <button onClick={ () => setContact(true)} className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'>
                                 {
                                     listing.type === 'rent' ? 'Contact Landlord' : 'Contact Owner'
                                 }
-                            </button>
+                                </button>
+                            </div>
                         )
                     }
                     {

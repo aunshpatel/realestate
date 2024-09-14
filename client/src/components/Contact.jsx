@@ -28,9 +28,9 @@ export default function Contact({listing}) {
         <>
         {
             landlord && (
-                <div className=''>
+                <div className='pb-20'>
                     <p>
-                    Contact <span className='font-semibold'>{landlord.username}</span> for <span className='font-semibold'>{"'" + listing.name + "'"}</span>
+                    Contact <span className='font-semibold'>{landlord.fullname}</span> for <span className='font-semibold'>{"'" + listing.name + "'"}</span>
                     </p>
                     <div className='flex flex-col gap-2'>
                         <textarea name="message" id="message" placeholder="Enter your message here" value={message} onChange={onChange} rows="2" className='w-full border p-3 rounded-lg'></textarea>
