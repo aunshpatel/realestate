@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import googlePlay from "../assets/images/coming-soon-to-googleplay.jpeg";
-import appStore from "../assets/images/coming-soon-to-apple.jpeg";
+import appStore from "../assets/images/apple-appstore.jpeg";
 
 export default function Footer() {
     return(
@@ -31,9 +31,11 @@ export default function Footer() {
                             </li>
                         </Link>
 
-                        <Link to='/delete-profile-instructions'>
-                            <img src={appStore} alt="Coming Soon to App Store" className='h-[50px]'/>
-                        </Link>
+                        <li>
+                            <a href="https://apps.apple.com/us/app/realestate-property-search-app/id6673890149" target='_blank'>
+                                <img src={appStore} alt="Download on the App Store" className='h-[50px]'/>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
