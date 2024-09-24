@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import googlePlay from "../assets/images/coming-soon-to-googleplay.jpeg";
+import googlePlay from "../assets/images/google-playstore.jpeg";
 import appStore from "../assets/images/apple-appstore.jpeg";
 
 export default function Footer() {
@@ -25,11 +25,11 @@ export default function Footer() {
                 </div>
                 <div className="flex xs:flex-col sm:flex-row items-center p-4">
                     <ul className='flex xs:flex-col sm:flex-row xs:space-y-8 sm:space-x-8'>
-                        <Link to='/mobileapp-privacy-policy'>
-                            <li className='text-md'>
-                                <img src={googlePlay} alt="Coming Soon to Google Play" className='h-[50px]'/>
-                            </li>
-                        </Link>
+                        <li className='text-md'>
+                            <a href="https://play.google.com/store/apps/details?id=com.aunsh.realestate&pcampaignid=web_share" target='_blank'>
+                                <img src={googlePlay} alt="Download on the Google Play" className='h-[50px]'/>
+                            </a>
+                        </li>
 
                         <li>
                             <a href="https://apps.apple.com/us/app/realestate-property-search-app/id6673890149" target='_blank'>
