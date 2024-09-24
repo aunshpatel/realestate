@@ -26,7 +26,7 @@ export default function Footer() {
                 <div className="flex xs:flex-col sm:flex-row items-center p-4">
                     <ul className='flex xs:flex-col sm:flex-row xs:space-y-8 sm:space-x-8'>
                         <li className='text-md'>
-                            <a href="https://play.google.com/store/apps/details?id=com.aunsh.realestate&pcampaignid=web_share" target='_blank'>
+                            <a href="https://play.google.com/store/apps/details?id=com.aunsh.realestate" target='_blank'>
                                 <img src={googlePlay} alt="Download on the Google Play" className='h-[50px]'/>
                             </a>
                         </li>
