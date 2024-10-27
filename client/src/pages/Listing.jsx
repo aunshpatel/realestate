@@ -270,7 +270,7 @@ export default function Listing() {
                             )
                         }
                     </div>
-                    <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm'>
+                    <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm pb-20'>
                         <li className='flex items-center gap-1 whitespace-nowrap'>
                             <FaBed className='text-lg' /> {listing.bedrooms} {listing.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                         </li>
