@@ -74,7 +74,7 @@ export default function Home() {
       {
         discountListings && discountListings.length > 0 && discountListings.map((listing) => (
           <SwiperSlide key={listing._id}>
-            <div className='h-[300px]' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
+            <div className='h-[300px] z-0' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
             </div>
           </SwiperSlide>
         ))
@@ -107,7 +107,7 @@ export default function Home() {
       {
         rentListings && rentListings.length > 0 && rentListings.map((listing) => (
           <SwiperSlide key={listing._id}>
-            <div className='h-[300px]' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
+            <div className='h-[300px] z-0' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
             </div>
           </SwiperSlide>
         ))
@@ -140,7 +140,7 @@ export default function Home() {
       {
         sellListings && sellListings.length > 0 && sellListings.map((listing) => (
           <SwiperSlide key={listing._id}>
-            <div className='h-[300px]' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
+            <div className='h-[300px] z-0' key={listing._id} style={{background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover'}}>
             </div>
           </SwiperSlide>
         ))
