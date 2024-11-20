@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const appVersionSchema = new mongoose.Schema({
-    currentVersion: {
+    mobileAppVersion: {
         type: String, 
         required: true,
     },
