@@ -162,7 +162,7 @@ export default function Listing() {
                     }
                 </Swiper>
                 
-                <div className='flex flex-col max-w-4xl mx-auto p-1 my-7 gap-6'>
+                <div className='flex flex-col max-w-4xl mx-auto p-1 my-7 gap-5'>
                     <div className='flex gap-4 justify-between'>
                         <div>
                             <button className='bg-slate-500 w-full max-w-[140px] text-white text-center p-2 rounded-md' onClick = {() =>{
@@ -240,37 +240,37 @@ export default function Listing() {
                             <span>{listing.selectedCurrency.split(' - ')[0]} {listing.regularPrice.toLocaleString('en-US')}</span>
                         } { listing.type === 'rent' && '/ month'}
                     </p>
-                    <p className='text-slate-800 font-semibold'>
+                    <p className='text-slate-800 font-semibold text-base'>
                         {listing.description}
                     </p>
-                    <p className='items-center gap-2 text-slate-600 my-1 text-md'>
+                    <p className='items-center gap-2 text-slate-600 my-1 text-base'>
                         To view the address in maps, click on the below address:
                         <br />
                         <p className='flex items-center gap-2'>
                             <FaMapMarkerAlt className='text-green-700'/>
-                            <a className='underline' href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
+                            <a className='underline text-base' href={`http://maps.google.com/?q=${listing.address}`} target="_blank">
                                 {listing.address}
                             </a>
                         </p>
                     </p>
                     <div className='flex gap-4'>
                         {listing.type === 'rent' ? 
-                            <p className='bg-slate-500 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
+                            <p className='bg-slate-500 text-base w-full max-w-[200px] text-white text-center p-2 rounded-md'>
                                 For Rent
                             </p> : 
-                            <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-2 rounded-md'>
+                            <p className='bg-green-900 text-base w-full max-w-[200px] text-white text-center p-2 rounded-md'>
                                 For Sale
                             </p>
                         }
                         {
                             listing.discount && (
-                                <p className='bg-blue-600 w-ful max-w-[200px] text-white text-center p-2 rounded-md'>
+                                <p className='bg-blue-600 w-ful max-w-[200px] text-base text-white text-center p-2 rounded-md'>
                                     {listing.selectedCurrency.split(' - ')[0]} {(listing.regularPrice - listing.discountPrice).toLocaleString('en-US')} Discount
                                 </p>
                             )
                         }
                     </div>
-                    <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm pb-20'>
+                    <ul className='flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-base pb-20'>
                         <li className='flex items-center gap-1 whitespace-nowrap'>
                             <FaBed className='text-lg' /> {listing.bedrooms} {listing.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                         </li>
