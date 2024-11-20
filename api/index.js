@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRouters from './routes/userRoutes.js';
 import authRouter from './routes/authRoute.js';
 import listingRouter from './routes/listingRoute.js';
+import appVersionRouter from './routes/appVersionRoute.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
@@ -31,6 +32,7 @@ app.listen(process.env.PORT || 3000, ()=>{
 app.use("/api/user", userRouters);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api", appVersionRouter);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
