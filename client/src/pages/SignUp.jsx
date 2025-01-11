@@ -6,14 +6,18 @@ export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isPasswordSame, setisPasswordSame] = useState(false);
   const navigate = useNavigate();
 
   function passwordToggle() {
     var x = document.getElementById("password");
-    if (x.type === "password") {
+    var y = document.getElementById("confirmpassword");
+    if (x.type === "password" && y.type === "password") {
       x.type = "text";
+      y.type = "text";
     } else {
       x.type = "password";
+      y.type = "password";
     }
   }
 
@@ -22,6 +26,17 @@ export default function SignUp() {
       ...formData, 
       [e.target.id]: e.target.value,
     });
+    if(confirmpassword.value != '' && password.value != '') {
+      if(confirmpassword.value == password.value) {
+        console.log('same passwords');
+        setisPasswordSame(true);
+      } else {
+        console.log('not same passwords');
+        setisPasswordSame(false);
+      }
+    } else {
+      setisPasswordSame(false);
+    }
   }
 
   const handleSubmit = async (e) =>{
@@ -71,14 +86,15 @@ export default function SignUp() {
         <input type="email" name="email" id="email" placeholder='Email' className='border p-3 rounded-lg'  onChange={handleChange}/>
 
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
-          
-          <div className='flex flex-row justify-center float-right'>
-            <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
-          </div>
 
-        <button disabled={loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:placeholder-opacity-80' onChange={handleChange}>
-          {loading?'Loading':'Sign Up'}
+        <input type="password" name="password" id="confirmpassword" placeholder='Confirm Password' className='border p-3 rounded-lg' onChange={handleChange}/>
           
+        <div className='flex flex-row justify-center float-right'>
+          <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
+        </div>
+
+        <button disabled={!isPasswordSame || loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:opacity-60 disabled:cursor-not-allowed' onChange={handleChange}>
+          {loading?'Loading':'Sign Up'}
         </button>
         <OAuth />
         
