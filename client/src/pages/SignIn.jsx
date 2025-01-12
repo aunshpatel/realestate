@@ -75,7 +75,7 @@ export default function SignIn() {
         {error && <p className='text-red-500 mt-5'>{error}</p>}
       </form>
 
-      <div className='flex gap-2 mt-5'>
+      <div className='flex flex-row justify-center gap-2 mt-5'>
         <p>
           New User?
         </p>
