@@ -7,13 +7,16 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
   function validationTextToggle() {
     if(confirmpassword.value == '' && password.value == '') {
       setIsPasswordSame(true);
+      setIsButtonDisabled(true);
     } else {
       setIsPasswordSame(false);
+      setIsButtonDisabled(false);
     }
   }
 
@@ -42,9 +45,11 @@ export default function SignUp() {
     if(confirmpassword.value == password.value) {
       console.log('same passwords');
       setIsPasswordSame(true);
+      setIsButtonDisabled(false);
     } else {
       console.log('not same passwords');
       setIsPasswordSame(false);
+      setIsButtonDisabled(true);
     }
     
     // if(confirmpassword.value != '' && password.value != '') {
@@ -120,7 +125,7 @@ export default function SignUp() {
           <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
         </div>
 
-        <button disabled={!isPasswordSame || loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:opacity-60 disabled:cursor-not-allowed' onChange={handleChange}>
+        <button disabled={isButtonDisabled || loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:opacity-60 disabled:cursor-not-allowed' onChange={handleChange}>
           {loading?'Loading':'Sign Up'}
         </button>
         <OAuth />
