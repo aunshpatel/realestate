@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import OAuth from '../components/OAuth';
 
@@ -6,8 +6,20 @@ export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isPasswordSame, setisPasswordSame] = useState(false);
+  const [isPasswordSame, setIsPasswordSame] = useState(false);
   const navigate = useNavigate();
+
+  function validationTextToggle() {
+    if(confirmpassword.value == '' && password.value == '') {
+      setIsPasswordSame(true);
+    } else {
+      setIsPasswordSame(false);
+    }
+  }
+
+  useEffect(() => {
+    validationTextToggle();
+  }, []);
 
   function passwordToggle() {
     var x = document.getElementById("password");
@@ -26,17 +38,26 @@ export default function SignUp() {
       ...formData, 
       [e.target.id]: e.target.value,
     });
-    if(confirmpassword.value != '' && password.value != '') {
-      if(confirmpassword.value == password.value) {
-        console.log('same passwords');
-        setisPasswordSame(true);
-      } else {
-        console.log('not same passwords');
-        setisPasswordSame(false);
-      }
+
+    if(confirmpassword.value == password.value) {
+      console.log('same passwords');
+      setIsPasswordSame(true);
     } else {
-      setisPasswordSame(false);
+      console.log('not same passwords');
+      setIsPasswordSame(false);
     }
+    
+    // if(confirmpassword.value != '' && password.value != '') {
+    //   if(confirmpassword.value == password.value) {
+    //     console.log('same passwords');
+    //     setIsPasswordSame(true);
+    //   } else {
+    //     console.log('not same passwords');
+    //     setIsPasswordSame(false);
+    //   }
+    // } else {
+    //   setIsPasswordSame(false);
+    // }
   }
 
   const handleSubmit = async (e) =>{
@@ -88,6 +109,12 @@ export default function SignUp() {
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
 
         <input type="password" name="password" id="confirmpassword" placeholder='Confirm Password' className='border p-3 rounded-lg' onChange={handleChange}/>
+
+        { 
+          !isPasswordSame && <div className='flex flex-row justify-center float-right'>
+            <p className='text-red-500'>Oops! The passwords don't match. Please check and try again.</p>
+          </div> 
+        }
           
         <div className='flex flex-row justify-center float-right'>
           <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
@@ -101,7 +128,7 @@ export default function SignUp() {
         {error && <p className='text-red-500 mt-5'>{error}</p>}
       </form>
 
-      <div className='flex gap-2 mt-5'>
+      <div className='flex flex-row justify-center gap-2 mt-5'>
         <p>
           Have an account?
         </p>
