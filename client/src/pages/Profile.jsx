@@ -280,9 +280,8 @@ export default function Profile() {
             Sign Out
           </span>
         </div>
-
+      </div>
       
-    </div>
       <div>
         { isDeleting === true && (
               <div className={`fixed top-0 left-0 w-full h-full flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`}>
