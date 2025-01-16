@@ -5,24 +5,30 @@ import OAuth from '../components/OAuth';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
+  const [passwordValue, setPasswordValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
-  function validationTextToggle() {
-    if(confirmpassword.value == '' && password.value == '') {
-      setIsPasswordSame(true);
-      setIsButtonDisabled(true);
-    } else {
-      setIsPasswordSame(false);
-      setIsButtonDisabled(false);
-    }
-  }
+  const isAtLeast8Characters = passwordValue.length >= 8; // Checks if the password has at least 8 characters.
+  const hasCapitalLetter = /[A-Z]/.test(passwordValue);   // Validates the presence of at least one uppercase letter.
+  const hasNumber = /[0-9]/.test(passwordValue);          // Validates the presence of at least one digit.
+  const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue); // Validates at least one special character.
 
-  useEffect(() => {
-    validationTextToggle();
-  }, []);
+  // function arePasswordsSameToggle() {
+  //   if(confirmpassword.value == '' && password.value == '') {
+  //     setIsPasswordSame(true);
+  //     setIsButtonDisabled(true);
+  //   } else {
+  //     setIsPasswordSame(false);
+  //     setIsButtonDisabled(false);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   arePasswordsSameToggle();
+  // }, []);
 
   function passwordToggle() {
     var x = document.getElementById("password");
@@ -41,8 +47,19 @@ export default function SignUp() {
       ...formData, 
       [e.target.id]: e.target.value,
     });
+    setPasswordValue(password.value);
 
-    if(confirmpassword.value == password.value) {
+    // if(confirmpassword.value == password.value) {
+    //   console.log('same passwords');
+    //   setIsPasswordSame(true);
+    //   setIsButtonDisabled(false);
+    // } else {
+    //   console.log('not same passwords');
+    //   setIsPasswordSame(false);
+    //   setIsButtonDisabled(true);
+    // }
+
+    if((confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
       console.log('same passwords');
       setIsPasswordSame(true);
       setIsButtonDisabled(false);
@@ -51,18 +68,6 @@ export default function SignUp() {
       setIsPasswordSame(false);
       setIsButtonDisabled(true);
     }
-    
-    // if(confirmpassword.value != '' && password.value != '') {
-    //   if(confirmpassword.value == password.value) {
-    //     console.log('same passwords');
-    //     setIsPasswordSame(true);
-    //   } else {
-    //     console.log('not same passwords');
-    //     setIsPasswordSame(false);
-    //   }
-    // } else {
-    //   setIsPasswordSame(false);
-    // }
   }
 
   const handleSubmit = async (e) =>{
@@ -114,16 +119,36 @@ export default function SignUp() {
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
 
         <input type="password" name="password" id="confirmpassword" placeholder='Confirm Password' className='border p-3 rounded-lg' onChange={handleChange}/>
+          
+        <div className='flex flex-row'>
+          <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
+        </div>
 
-        { 
+        <ul className='flex flex-wrap justify-between'>
+          {/* Checks if the password meets each condition and dynamically styles the text */}
+          <li style={{ color: isAtLeast8Characters ? "green" : "red" }}>
+            {isAtLeast8Characters ? "✔" : "✖"} At least 8 characters
+          </li>
+          <li style={{ color: hasCapitalLetter ? "green" : "red" }}>
+            {hasCapitalLetter ? "✔" : "✖"} At least 1 capital letter
+          </li>
+          <li style={{ color: hasNumber ? "green" : "red" }}>
+            {hasNumber ? "✔" : "✖"} At least 1 number
+          </li>
+          <li style={{ color: hasSpecialCharacter ? "green" : "red" }}>
+            {hasSpecialCharacter ? "✔" : "✖"} At least 1 special character
+          </li>
+          <li style={{ color: isPasswordSame ? "green" : "red" }}>
+            {isPasswordSame ? "✔" : "✖"} Passwords Match
+          </li>
+        </ul>
+
+        {/* { 
           !isPasswordSame && <div className='flex flex-row justify-center float-right'>
             <p className='text-red-500'>Oops! The passwords don't match. Please check and try again.</p>
           </div> 
-        }
-          
-        <div className='flex flex-row justify-center float-right'>
-          <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
-        </div>
+        } */}
+        
 
         <button disabled={isButtonDisabled || loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:opacity-60 disabled:cursor-not-allowed' onChange={handleChange}>
           {loading?'Loading':'Sign Up'}
@@ -133,7 +158,7 @@ export default function SignUp() {
         {error && <p className='text-red-500 mt-5'>{error}</p>}
       </form>
 
-      <div className='flex flex-row justify-center gap-2 mt-5'>
+      <div className='flex flex-row gap-2 mt-5'>
         <p>
           Have an account?
         </p>
