@@ -5,6 +5,7 @@ import OAuth from '../components/OAuth';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
   const [passwordValue, setPasswordValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(false);
@@ -42,31 +43,62 @@ export default function SignUp() {
     }
   }
 
-  const handleChange = (e) =>{
+  // const handleChange = (e) =>{
+  //   setFormData({
+  //     ...formData, 
+  //     [e.target.id]: e.target.value,
+  //   });
+  //   setPasswordValue(password.value);
+
+  //   if((confirmpassword.value == password.value) && (confirmpassword.value != '' && password.value != '')) {
+  //     console.log('same passwords');
+  //     setIsPasswordSame(true);
+  //     // setIsButtonDisabled(false);
+  //   } else {
+  //     console.log('not same passwords');
+  //     setIsPasswordSame(false);
+  //     // setIsButtonDisabled(true);
+  //   }
+
+  //   if((email.value != '') && (username.value != '') && (fullname.value != '') &&(confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
+  //     // setIsPasswordSame(true);
+  //     setIsButtonDisabled(false);
+  //   } else {
+  //     // setIsPasswordSame(false);
+  //     setIsButtonDisabled(true);
+  //   }
+  // }
+
+  const handleChange = (e) => {
     setFormData({
-      ...formData, 
+      ...formData,
       [e.target.id]: e.target.value,
     });
+  
     setPasswordValue(password.value);
-
-    if((confirmpassword.value == password.value) && (confirmpassword.value != '' && password.value != '')) {
+  
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    const isEmailValid = email.value === '' || emailRegex.test(email.value);
+  
+    if ((confirmpassword.value == password.value) && (confirmpassword.value != '' && password.value != '')) {
       console.log('same passwords');
       setIsPasswordSame(true);
-      // setIsButtonDisabled(false);
     } else {
       console.log('not same passwords');
       setIsPasswordSame(false);
-      // setIsButtonDisabled(true);
     }
-
-    if((email.value != '') && (username.value != '') && (fullname.value != '') &&(confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
-      // setIsPasswordSame(true);
+  
+    if (isEmailValid && email.value != '' && username.value != '' && fullname.value != '' && confirmpassword.value == password.value && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
       setIsButtonDisabled(false);
     } else {
-      // setIsPasswordSame(false);
       setIsButtonDisabled(true);
+      if (email.value !== '' && !emailRegex.test(email.value)) {
+        setEmailError("Invalid email format. Please enter a valid email address.");
+      } else {
+        setEmailError(null); // Reset the error if email is valid
+      }
     }
-  }
+  };
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -113,7 +145,9 @@ export default function SignUp() {
         <input type="text" name="fullname" id="fullname" placeholder='Full Name' className='border p-3 rounded-lg'  onChange={handleChange}/>  
 
         <input type="email" name="email" id="email" placeholder='Email' className='border p-3 rounded-lg'  onChange={handleChange}/>
-
+        
+        {emailError && <p className='text-red-500'>{emailError}</p>}
+        
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
 
         <input type="password" name="password" id="confirmpassword" placeholder='Confirm Password' className='border p-3 rounded-lg' onChange={handleChange}/>
