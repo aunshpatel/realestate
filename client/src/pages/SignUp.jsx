@@ -16,19 +16,19 @@ export default function SignUp() {
   const hasNumber = /[0-9]/.test(passwordValue);          // Validates the presence of at least one digit.
   const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue); // Validates at least one special character.
 
-  // function arePasswordsSameToggle() {
-  //   if(confirmpassword.value == '' && password.value == '') {
-  //     setIsPasswordSame(true);
-  //     setIsButtonDisabled(true);
-  //   } else {
-  //     setIsPasswordSame(false);
-  //     setIsButtonDisabled(false);
-  //   }
-  // }
+  function arePasswordsSameToggle() {
+    if(confirmpassword.value == '' && password.value == '') {
+      // setIsPasswordSame(true);
+      setIsButtonDisabled(true);
+    } else {
+      // setIsPasswordSame(false);
+      setIsButtonDisabled(false);
+    }
+  }
 
-  // useEffect(() => {
-  //   arePasswordsSameToggle();
-  // }, []);
+  useEffect(() => {
+    arePasswordsSameToggle();
+  }, []);
 
   function passwordToggle() {
     var x = document.getElementById("password");
@@ -49,23 +49,21 @@ export default function SignUp() {
     });
     setPasswordValue(password.value);
 
-    // if(confirmpassword.value == password.value) {
-    //   console.log('same passwords');
-    //   setIsPasswordSame(true);
-    //   setIsButtonDisabled(false);
-    // } else {
-    //   console.log('not same passwords');
-    //   setIsPasswordSame(false);
-    //   setIsButtonDisabled(true);
-    // }
-
-    if((confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
+    if((confirmpassword.value == password.value) && (confirmpassword.value != '' && password.value != '')) {
       console.log('same passwords');
       setIsPasswordSame(true);
-      setIsButtonDisabled(false);
+      // setIsButtonDisabled(false);
     } else {
       console.log('not same passwords');
       setIsPasswordSame(false);
+      // setIsButtonDisabled(true);
+    }
+
+    if((email.value != '') && (username.value != '') && (fullname.value != '') &&(confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
+      // setIsPasswordSame(true);
+      setIsButtonDisabled(false);
+    } else {
+      // setIsPasswordSame(false);
       setIsButtonDisabled(true);
     }
   }
