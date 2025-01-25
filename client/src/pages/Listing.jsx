@@ -23,6 +23,8 @@ export default function Listing() {
     const params = useParams();
     const [open, setOpen] = useState(false);
     const [flagReason, setFlagReason] = useState('');
+    const [flagReasonText, setFlagReasonText] = useState('');
+    const [isReasonOther, setIsReasonOther] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [formData, setFormData] = useState({
         imageUrls:[],
@@ -109,8 +111,6 @@ export default function Listing() {
 
     // Handle flag submission
     const handleSubmit = async (listingID) =>{
-        console.log("listingID:", listingID);
-        
         try {
             setLoading(true);
             setError(false);
@@ -122,8 +122,7 @@ export default function Listing() {
                 body: JSON.stringify({
                     // ...formData,
                     isFlagged: true,
-                    flaggedReason: flagReason,
-                    userRef: currentUser._id,
+                    flaggedReason: flagReason === "Other" ? `${flagReason} - ${flagReasonText}` : flagReason,
                 }),
             });
 
@@ -137,6 +136,8 @@ export default function Listing() {
             navigate('/');
 
         } catch (error) {
+            console.log("Error:",error.message);
+            
             setError(error.message);
             setLoading(false);
         }
@@ -191,30 +192,35 @@ export default function Listing() {
 
                                     <div className="mb-4">
                                         <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Spam" className="mr-2" onChange={(e) => setFlagReason(e.target.value)} />
+                                            <input type="radio" name="reason" value="Spam" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
                                             Spam
                                         </label>
                                         <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Offensive Language" className="mr-2" onChange={(e) => setFlagReason(e.target.value)} />
+                                            <input type="radio" name="reason" value="Offensive Language" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
                                             Offensive Language
                                         </label>
                                         <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Hate Speech" className="mr-2" onChange={(e) => setFlagReason(e.target.value)} />
+                                            <input type="radio" name="reason" value="Hate Speech" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(false);} } />
                                             Hate Speech
                                         </label>
-                                        <label className="block">
-                                            <input type="radio" name="reason" value="Other" className="mr-2" onChange={(e) => setFlagReason(e.target.value)} />
+                                        <label className="block mb-2">
+                                            <input type="radio" name="reason" value="Other" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(true);} } />
                                             Other
                                         </label>
+                                        { isReasonOther && <label className="block">
+                                            Reason:
+                                            <input type="text" name="reasonforother" id="reasonforother" placeholder='Enter Reason' className="ml-2 underline" onChange={(e) => setFlagReasonText(e.target.value)} />
+                                        </label> }
                                     </div>
 
                                     <div className="flex justify-end space-x-4">
                                     <button onClick={handleClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                                         Cancel
                                     </button>
-                                    <button onClick={() => handleSubmit(listing._id)} disabled={!flagReason} className={`px-4 py-2 rounded text-white ${!flagReason ? 'bg-gray-400' : 'bg-red-600 hover:bg-red-700'}`} >
+                                    <button onClick={() => handleSubmit(listing._id)} disabled={!flagReason || !flagReasonText} className={`px-4 py-2 rounded text-white ${!flagReason || !flagReasonText ? 'bg-gray-400' : 'bg-red-600 hover:bg-red-700'}`} >
                                         Submit
                                     </button>
+                                    {/*  */}
                                     </div>
                                 </div>
                             </div>
