@@ -58,6 +58,18 @@ const listingSchema = new mongoose.Schema({
         type: String,
         default:'',
     },
+    flaggedByID: {
+        type: String,
+        default:'',
+    },
+    flaggedByName: {
+        type: String,
+        default:'',
+    },
+    flaggedByEmailID: {
+        type: String,
+        default:'',
+    },
     imageUrls:{
         type: Array,
         // required: true

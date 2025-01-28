@@ -41,10 +41,13 @@ export default function Listing() {
         discount:false,
         isFlagged: false,
         flaggedReason:'',
+        flaggedByID:'',
+        flaggedByName:'',
+        flaggedByEmailID:'',
         parking:0,
         furnished:'Furnished',
     });
-
+    
     const handleOpen = () => {
         setOpen(true);
     };
@@ -115,6 +118,7 @@ export default function Listing() {
         try {
             setLoading(true);
             setError(false);
+            
             const res = await fetch(`/api/listing/update/${listingID}`,{
                 method:'POST',
                 headers:{
@@ -124,6 +128,9 @@ export default function Listing() {
                     // ...formData,
                     isFlagged: true,
                     flaggedReason: flagReason === "Other" ? `${flagReason} - ${flagReasonText}` : flagReason,
+                    flaggedByID:currentUser._id,
+                    flaggedByName:currentUser.fullname,
+                    flaggedByEmailID:currentUser.email,
                 }),
             });
 
