@@ -29,6 +29,9 @@ export default function UpdateListing() {
         flaggedReason:'',
         parking:0,
         furnished:'Furnished',
+        flaggedByID: '',
+        flaggedByName: '',
+        flaggedByEmailID: '',
     });
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
