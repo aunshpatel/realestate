@@ -25,6 +25,7 @@ export default function Listing() {
     const [flagReason, setFlagReason] = useState('');
     const [flagReasonText, setFlagReasonText] = useState('');
     const [isReasonOther, setIsReasonOther] = useState(false);
+    const [isReasonTextEmpty, setIsReasonTextEmpty] = useState(true);
     const [showAlert, setShowAlert] = useState(false);
     const [formData, setFormData] = useState({
         imageUrls:[],
@@ -177,62 +178,76 @@ export default function Listing() {
                             </button>
                             { copied && ( <p className='z-10 rounded-md bg-slate-100 p-2'>Link Copied! You Can Now Paste At Your Desired Place!</p> ) }
                         </div>
-                        <div className="relative">
+                        {
+                            currentUser && (
+                            <div className="relative">
                             {/* Flag button */}
-                            <button onClick={handleOpen} className="p-2 text-red-600 hover:text-red-800" aria-label="Flag Content">
-                                <FaFlag size={24} />
-                            </button>
+                                <button onClick={handleOpen} className="p-2 text-red-600 hover:text-red-800" aria-label="Flag Content">
+                                    <FaFlag size={24} />
+                                </button>
 
-                            {/* Modal for flagging content */}
-                            {open && (
-                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
-                                <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                                    <h2 className="text-lg font-bold mb-4">Report Inappropriate Content</h2>
-                                    <p className="mb-4">Please select a reason for flagging this content:</p>
+                                {/* Modal for flagging content */}
+                                {
+                                    open && (
+                                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+                                            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                                                <h2 className="text-lg font-bold mb-4">Report Inappropriate Content</h2>
+                                                <p className="mb-4">Please select a reason for flagging this content:</p>
 
-                                    <div className="mb-4">
-                                        <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Spam" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
-                                            Spam
-                                        </label>
-                                        <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Offensive Language" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
-                                            Offensive Language
-                                        </label>
-                                        <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Hate Speech" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(false);} } />
-                                            Hate Speech
-                                        </label>
-                                        <label className="block mb-2">
-                                            <input type="radio" name="reason" value="Other" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(true);} } />
-                                            Other
-                                        </label>
-                                        { isReasonOther && <label className="block">
-                                            Reason:
-                                            <input type="text" name="reasonforother" id="reasonforother" placeholder='Enter Reason' className="ml-2 underline" onChange={(e) => setFlagReasonText(e.target.value)} />
-                                        </label> }
+                                                <div className="mb-4">
+                                                    <label className="block mb-2">
+                                                        <input type="radio" name="reason" value="Spam" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
+                                                        Spam
+                                                    </label>
+                                                    <label className="block mb-2">
+                                                        <input type="radio" name="reason" value="Offensive Language" className="mr-2" onChange={(e) => {setFlagReason(e.target.value);setIsReasonOther(false);} } />
+                                                        Offensive Language
+                                                    </label>
+                                                    <label className="block mb-2">
+                                                        <input type="radio" name="reason" value="Hate Speech" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(false);} } />
+                                                        Hate Speech
+                                                    </label>
+                                                    <label className="block mb-2">
+                                                        <input type="radio" name="reason" value="Other" className="mr-2" onChange={(e) => {setFlagReason(e.target.value); setIsReasonOther(true);} } />
+                                                        Other
+                                                    </label>
+                                                    { isReasonOther && <label className="block">
+                                                        Reason:
+                                                        <input type="text" name="reasonforother" id="reasonforother" placeholder='Enter Reason' className="ml-2 underline" onChange={(e) => {
+                                                            setFlagReasonText(e.target.value); 
+                                                            if(flagReasonText != ''){
+                                                                setIsReasonTextEmpty(false);
+                                                            } else if(flagReasonText == ''){
+                                                                setIsReasonTextEmpty(true);
+                                                            }
+                                                        }} />
+                                                    </label> }
+                                                </div>
+
+                                                <div className="flex justify-end space-x-4">
+                                                <button onClick={handleClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                                                    Cancel
+                                                </button>
+                                                <button onClick={() => handleSubmit(listing._id)} disabled={!flagReason || (isReasonOther && isReasonTextEmpty)} className={`px-4 py-2 rounded text-white ${!flagReason || (isReasonOther && isReasonTextEmpty) ? 'bg-gray-400' : 'bg-red-600 hover:bg-red-700'}`} >
+                                                    Submit
+                                                </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
+                                {/* Alert message */}
+                                {
+                                    showAlert && (
+                                    <div className="absolute top-0 right-0 mt-4 mr-4 p-4 bg-green-500 text-white rounded-lg shadow-lg">
+                                        Content flagged successfully!
                                     </div>
-
-                                    <div className="flex justify-end space-x-4">
-                                    <button onClick={handleClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
-                                        Cancel
-                                    </button>
-                                    <button onClick={() => handleSubmit(listing._id)} disabled={!flagReason || !flagReasonText} className={`px-4 py-2 rounded text-white ${!flagReason || !flagReasonText ? 'bg-gray-400' : 'bg-red-600 hover:bg-red-700'}`} >
-                                        Submit
-                                    </button>
-                                    {/*  */}
-                                    </div>
-                                </div>
+                                    )
+                                }
                             </div>
-                        )}
-
-                        {/* Alert message */}
-                        {showAlert && (
-                            <div className="absolute top-0 right-0 mt-4 mr-4 p-4 bg-green-500 text-white rounded-lg shadow-lg">
-                            Content flagged successfully!
-                            </div>
-                        )}
-                        </div>
+                            )
+                        }
                     </div>
                     
                     <p className='text-2xl'>
