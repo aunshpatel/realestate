@@ -23,7 +23,6 @@ export default function Listing() {
     const params = useParams();
     const [open, setOpen] = useState(false);
     const [flagReason, setFlagReason] = useState('');
-    const [flagReasonText, setFlagReasonText] = useState('');
     const [isReasonOther, setIsReasonOther] = useState(false);
     const [isReasonTextEmpty, setIsReasonTextEmpty] = useState(true);
     const [showAlert, setShowAlert] = useState(false);
@@ -221,12 +220,15 @@ export default function Listing() {
                                                     { isReasonOther && <label className="block">
                                                         Reason:
                                                         <input type="text" name="reasonforother" id="reasonforother" placeholder='Enter Reason' className="ml-2 underline" onChange={(e) => {
-                                                            setFlagReasonText(e.target.value); 
-                                                            if(flagReasonText != ''){
+                                                            console.log("e.target.value:",e.target.value);
+                                                            if(e.target.value != ''){
                                                                 setIsReasonTextEmpty(false);
-                                                            } else if(flagReasonText == ''){
+                                                            } else if(e.target.value == ''){
                                                                 setIsReasonTextEmpty(true);
                                                             }
+                                                            console.log('flagReason:',flagReason);
+                                                            console.log('isReasonOther:',isReasonOther);
+                                                            console.log('isReasonTextEmpty:',isReasonTextEmpty);
                                                         }} />
                                                     </label> }
                                                 </div>
