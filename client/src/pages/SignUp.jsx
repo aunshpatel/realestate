@@ -43,32 +43,6 @@ export default function SignUp() {
     }
   }
 
-  // const handleChange = (e) =>{
-  //   setFormData({
-  //     ...formData, 
-  //     [e.target.id]: e.target.value,
-  //   });
-  //   setPasswordValue(password.value);
-
-  //   if((confirmpassword.value == password.value) && (confirmpassword.value != '' && password.value != '')) {
-  //     console.log('same passwords');
-  //     setIsPasswordSame(true);
-  //     // setIsButtonDisabled(false);
-  //   } else {
-  //     console.log('not same passwords');
-  //     setIsPasswordSame(false);
-  //     // setIsButtonDisabled(true);
-  //   }
-
-  //   if((email.value != '') && (username.value != '') && (fullname.value != '') &&(confirmpassword.value == password.value) && isAtLeast8Characters && hasCapitalLetter && hasNumber && hasSpecialCharacter) {
-  //     // setIsPasswordSame(true);
-  //     setIsButtonDisabled(false);
-  //   } else {
-  //     // setIsPasswordSame(false);
-  //     setIsButtonDisabled(true);
-  //   }
-  // }
-
   const handleChange = (e) => {
     setFormData({
       ...formData,

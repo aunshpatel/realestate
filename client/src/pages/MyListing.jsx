@@ -63,7 +63,6 @@ export default function MyListing() {
           transition: all 100ms ease;
       
           &:hover {
-            // background-color: grey;
             cursor:pointer;
             border-color: grey;
           }
@@ -130,22 +129,20 @@ export default function MyListing() {
     React.useEffect(() => {
         const handleShowListings = async () => {
             try{ 
-              setShowListingsError(false);
-              const res = await fetch(`/api/user/listings/${currentUser._id}`);
-              const data = await res.json();
-              if(data.success === false){
+                setShowListingsError(false);
+                const res = await fetch(`/api/user/listings/${currentUser._id}`);
+                const data = await res.json();
+                if(data.success === false){
                 setShowListingsError(true);
                 return;
-              }
+                }
         
-              setUserListings(data);
+                setUserListings(data);
             } catch(error){
-              setShowListingsError(true);
+                setShowListingsError(true);
             }
-          }
-          handleShowListings();
-
-        // 
+        }
+        handleShowListings();
     }, [currentUser._id]);
 
     const handleListingDelete = async(listingID) => {
