@@ -17,7 +17,7 @@ router.get("/listings/:id", getUserListings);
 // router.get('/profile/:id', verifyToken, getUser);
 router.get('/profile/:id', getUser);
 
-router.get('/getuserbyemail/:email', getUserByEmail);
+router.get('/get-user/:id', getUserByEmail);
 
 export default router;
 // module.exports = router;
