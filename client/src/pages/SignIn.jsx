@@ -62,7 +62,7 @@ export default function SignIn() {
 
         <input type="password" name="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange}/>
           
-        <div className='flex flex-row justify-center float-right'>
+        <div className='flex flex-row justify-start float-right'>
           <input type="checkbox" onClick={passwordToggle} /> &nbsp; Show Password
         </div>
 
@@ -75,7 +75,7 @@ export default function SignIn() {
         {error && <p className='text-red-500 mt-5'>{error}</p>}
       </form>
 
-      <div className='flex flex-row justify-center gap-2 mt-5'>
+      <div className='flex flex-row justify-start gap-2 mt-5'>
         <p>
           New User?
         </p>
