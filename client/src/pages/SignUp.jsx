@@ -152,6 +152,7 @@ export default function SignUp() {
         <button disabled={isButtonDisabled || loading} id="signUp" className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:placeholder-opacity-95 disabled:opacity-60 disabled:cursor-not-allowed' onChange={handleChange}>
           {loading?'Loading':'Sign Up'}
         </button>
+        {/* Reference to Google OAuth */}
         <OAuth />
         
         {error && <p className='text-red-500 mt-5'>{error}</p>}
