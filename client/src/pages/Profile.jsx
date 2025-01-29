@@ -8,17 +8,25 @@ import { deleteUserStart, deleteUserSuccess, deleteUserFailure, updateUserFailur
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
   const fileRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [fileUploadError, setFileUploadError] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [showPwdCriteria, setShowPwdCriteria] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updateFail, setUpdateFail] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [oldFirebaseProfilePic, setOldFirebaseProfilePic] = useState('');
   const [newFirebaseProfilePic, setNewFirebaseProfilePic] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [formData, setFormData] = useState({});
   const dispatch = useDispatch(); 
+
+  const isAtLeast8Characters = passwordValue.length >= 8; // Checks if the password has at least 8 characters.
+  const hasCapitalLetter = /[A-Z]/.test(passwordValue);   // Validates the presence of at least one uppercase letter.
+  const hasNumber = /[0-9]/.test(passwordValue);          // Validates the presence of at least one digit.
+  const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue); // Validates at least one special character.
 
   useEffect(()=>{
     if(file) {
@@ -105,6 +113,10 @@ export default function Profile() {
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.id]: e.target.value});
+    setPasswordValue(password.value);
+    if(password.value != ''){
+      setShowPwdCriteria(true);
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -258,8 +270,27 @@ export default function Profile() {
           <input type="email" id="email" placeholder='Email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} />
           
           <input type="password" id="password" placeholder='Password' className='border p-3 rounded-lg' onChange={handleChange} />
-          
-          <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-80'>
+          {
+            showPwdCriteria && (
+              <ul className='flex flex-wrap justify-between'>
+                {/* Checks if the password meets each condition and dynamically styles the text */}
+                <li style={{ color: isAtLeast8Characters ? "green" : "red" }}>
+                  {isAtLeast8Characters ? "✔" : "✖"} At least 8 characters
+                </li>
+                <li style={{ color: hasCapitalLetter ? "green" : "red" }}>
+                  {hasCapitalLetter ? "✔" : "✖"} At least 1 capital letter
+                </li>
+                <li style={{ color: hasNumber ? "green" : "red" }}>
+                  {hasNumber ? "✔" : "✖"} At least 1 number
+                </li>
+                <li style={{ color: hasSpecialCharacter ? "green" : "red" }}>
+                  {hasSpecialCharacter ? "✔" : "✖"} At least 1 special character
+                </li>
+              </ul>
+            )
+          }
+
+          <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-60'>
             {loading ? 'Loading...' :  'Update'}
           </button>
         </form>
